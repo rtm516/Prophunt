@@ -1,0 +1,19 @@
+{
+	"name": "prophunt",
+	"version": "1.0",
+	"sharedassets": "*.*",
+
+	"depends": [
+		"base",
+		"rust",
+		"sandbox"
+	],
+
+	"gamemodes": [
+		{
+			"name": "prophunt",
+			"title": "Prophunt",
+			"description": "TODO"
+		}
+	]
+}
