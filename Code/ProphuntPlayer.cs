@@ -1,4 +1,5 @@
 ﻿using Prophunt;
+using Prophunt.Entities;
 using Prophunt.Util;
 using Sandbox;
 using System;
@@ -13,8 +14,8 @@ namespace Prophunt
 		public bool Locked { get; set; }
 
 		[Net]
-		private Prop Target { get; set; }
-		private Prop _Target;
+		private Sandbox.Prop Target { get; set; }
+		private Sandbox.Prop _Target;
 
 		public ProphuntPlayer()
 		{
@@ -27,6 +28,31 @@ namespace Prophunt
 			base.Spawn();
 
 			Team = Rand.Int( 1 ) == 0 ? Team.Seeker : Team.Prop;
+		}
+
+		internal void OnPropUse( Entities.Prop prop )
+		{
+			if ( !(Animator is PropAnimator) )
+			{
+				Animator = new PropAnimator();
+			}
+
+			if ( !(Controller is PropController) )
+			{
+				Controller = new PropController();
+			}
+
+			Model model = prop.GetModel();
+			SetModel( model );
+
+			// TODO: https://discord.com/channels/833983068468936704/834020807633535047/835298925556662312
+			// a good way to do colliders for prophunt may be making it so that when you become a prop, your collider represents the smallest possible bounds the prop could have?
+
+			float xyMax = (float)Math.Round( Math.Max( CollisionBounds.Maxs.x, CollisionBounds.Maxs.y ) );
+			float xyMaxInverted = xyMax * -1;
+			float height = (float)Math.Round( CollisionBounds.Maxs.z - CollisionBounds.Mins.z );
+
+			(Controller as WalkController).SetBBox( new Vector3( xyMaxInverted, xyMaxInverted, 0 ), new Vector3( xyMax, xyMax, height ) );
 		}
 
 		public override void Respawn()
@@ -140,36 +166,9 @@ namespace Prophunt
 					.Ignore( this )
 					.Run();
 
-				if ( tr.Hit && tr.Body.IsValid() && tr.Entity is Prop && tr.Body.BodyType == PhysicsBodyType.Dynamic )
+				if ( tr.Hit && tr.Body.IsValid() && tr.Entity is Sandbox.Prop && tr.Body.BodyType == PhysicsBodyType.Dynamic )
 				{
-					Target = tr.Entity as Prop;
-
-					if ( Input.Pressed( InputButton.Use ) )
-					{
-
-						if ( !(Animator is PropAnimator) )
-						{
-							Animator = new PropAnimator();
-						}
-
-						if ( !(Controller is PropController) )
-						{
-							Controller = new PropController();
-						}
-
-						Model model = (tr.Entity as Prop).GetModel();
-						SetModel( model );
-
-
-						// TODO: https://discord.com/channels/833983068468936704/834020807633535047/835298925556662312
-						// a good way to do colliders for prophunt may be making it so that when you become a prop, your collider represents the smallest possible bounds the prop could have?
-
-						float xyMax = (float)Math.Round( Math.Max( CollisionBounds.Maxs.x, CollisionBounds.Maxs.y ) );
-						float xyMaxInverted = xyMax * -1;
-						float height = (float)Math.Round( CollisionBounds.Maxs.z - CollisionBounds.Mins.z );
-
-						(Controller as WalkController).SetBBox( new Vector3( xyMaxInverted, xyMaxInverted, 0 ), new Vector3( xyMax, xyMax, height ) );
-					}
+					Target = tr.Entity as Sandbox.Prop;
 				}
 				else
 				{

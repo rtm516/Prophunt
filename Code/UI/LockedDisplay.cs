@@ -19,6 +19,16 @@ namespace Prophunt.UI
 			var player = Player.Local as ProphuntPlayer;
 			if ( player == null ) return;
 
+			if ( player.Team != Team.Prop )
+			{
+				Style.Display = DisplayMode.None;
+			}
+			else
+			{
+				Style.Display = DisplayMode.Flex;
+			}
+			Style.Dirty();
+
 			Label.SetText( player.Locked ? "🔒" : "🔓" );
 		}
 	}

@@ -13,10 +13,9 @@ namespace Prophunt
 	[Library( "prophunt", Title = "Prophunt" )]
 	partial class Game : Sandbox.Game
 	{
-		private TimeSince timeSinceRoundOver;
-
 		[Net]
 		public BaseRound Round { get; set; }
+		private BaseRound _lastRound;
 
 		public static Game Instance
 		{
@@ -29,50 +28,33 @@ namespace Prophunt
 			if ( IsServer )
 				new MainHud();
 
+			Log.Info( IsClient.ToString() + "\t1" );
 			_ = StartTickTimer();
+
+			ChangeRound( new GameRound() );
 		}
 
 		public override Player CreatePlayer() => new ProphuntPlayer();
+
+		public void ChangeRound( BaseRound round )
+		{
+			Assert.NotNull( round );
+
+			Round?.Finish();
+			Round = round;
+			Round?.Start();
+		}
 
 		public override void PlayerKilled( Player player )
 		{
 			base.PlayerKilled( player );
 			Round?.PlayerKilled( player );
-
-			Dictionary<Team, int> playerTeams = new Dictionary<Team, int>();
-			foreach ( Player loopPlayer in Player.All )
-			{
-				ProphuntPlayer prophuntPlayer = loopPlayer as ProphuntPlayer;
-				if ( prophuntPlayer.Team != Team.Spectator )
-				{
-					playerTeams[prophuntPlayer.Team] = playerTeams.GetValueOrDefault( prophuntPlayer.Team, 0 );
-				}
-			}
-
-			int count;
-			if ( playerTeams.TryGetValue( Team.Prop, out count ) && count == 0 )
-			{
-				// Seekers win
-			}
-			else if ( playerTeams.TryGetValue( Team.Seeker, out count ) && count == 0 )
-			{
-				// Props win
-			}
-
-			timeSinceRoundOver = 0;
-
-
-			// TODO: This is shit and needs making better
-			foreach ( Player loopPlayer in Player.All )
-			{
-				(loopPlayer as ProphuntPlayer).Team = Rand.Int( 1 ) == 0 ? Team.Seeker : Team.Prop;
-				loopPlayer.Respawn();
-			}
 		}
 
 		// Work around until ticks are implemented for Games
 		public async Task StartTickTimer()
 		{
+			Log.Info( IsClient.ToString() +  "\t2" );
 			while ( true )
 			{
 				await Task.NextPhysicsFrame();
@@ -83,6 +65,18 @@ namespace Prophunt
 		private void Tick()
 		{
 			Round?.Tick();
+
+			// From: https://github.com/Facepunch/sbox-hidden/blob/71e32f7d1f28d51a5c3078e99f069d0b73ef490d/code/Game.cs#L186
+			if ( IsClient )
+			{
+				// We have to hack around this for now until we can detect changes in net variables.
+				if ( _lastRound != Round )
+				{
+					_lastRound?.Finish();
+					_lastRound = Round;
+					_lastRound.Start();
+				}
+			}
 		}
 	}
 }
