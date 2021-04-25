@@ -10,7 +10,7 @@ namespace Prophunt.Rounds
 		{
 			base.Tick();
 
-			if (Host.IsServer && TimeSinceRoundStart > 60 * 5)
+			if ( Host.IsServer && TimeSinceRoundStart > 60 * 5 )
 			{
 				// Time ran out so props win
 				Game.Instance.ChangeRound( new PostGameRound( false ) );
@@ -29,7 +29,7 @@ namespace Prophunt.Rounds
 				if ( prophuntPlayer.Team != Team.Spectator )
 				{
 					aliveCount++;
-					playerTeams[prophuntPlayer.Team] = playerTeams.GetValueOrDefault( prophuntPlayer.Team, 0 );
+					playerTeams[prophuntPlayer.Team] = playerTeams.GetValueOrDefault( prophuntPlayer.Team, 0 ) + 1;
 				}
 			}
 
@@ -40,15 +40,15 @@ namespace Prophunt.Rounds
 			}
 
 			int count;
-			if ( playerTeams.TryGetValue( Team.Prop, out count ) && count == 0 )
+			if ( !playerTeams.TryGetValue( Team.Prop, out count ) )
 			{
 				// Seekers win
-				Game.Instance.ChangeRound( new PostGameRound(true) );
+				Game.Instance.ChangeRound( new PostGameRound( true ) );
 			}
-			else if ( playerTeams.TryGetValue( Team.Seeker, out count ) && count == 0 )
+			else if ( !playerTeams.TryGetValue( Team.Seeker, out count ) )
 			{
 				// Props win
-				Game.Instance.ChangeRound( new PostGameRound(false) );
+				Game.Instance.ChangeRound( new PostGameRound( false ) );
 			}
 		}
 	}
