@@ -12,6 +12,7 @@ namespace Prophunt.UI
 		public SeekerBlackout()
 		{
 		}
+
 		public override void Tick()
 		{
 			var player = Player.Local as ProphuntPlayer;

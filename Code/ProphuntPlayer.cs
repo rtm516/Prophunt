@@ -106,7 +106,7 @@ namespace Prophunt
 					_Target.GlowActive = false;
 				}
 				_Target = Target;
-				if ( _Target .IsValid() )
+				if ( _Target.IsValid() )
 				{
 					_Target.GlowActive = true;
 					_Target.GlowColor = Color.Green;
@@ -166,7 +166,7 @@ namespace Prophunt
 					.Ignore( this )
 					.Run();
 
-				if ( tr.Hit && tr.Body.IsValid() && tr.Entity is Sandbox.Prop && tr.Body.BodyType == PhysicsBodyType.Dynamic )
+				if ( tr.Hit && tr.Body.IsValid() && tr.Entity is Sandbox.Prop && tr.Body.BodyType == PhysicsBodyType.Dynamic && !Game.Instance.BannedProps.Contains( (tr.Entity as Sandbox.Prop).GetModelName() ) )
 				{
 					Target = tr.Entity as Sandbox.Prop;
 				}

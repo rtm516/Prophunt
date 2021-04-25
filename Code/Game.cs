@@ -20,6 +20,7 @@ namespace Prophunt
 		public readonly float SeekerPct = 0.1f;
 		public readonly int MinPlayers = 2;
 		public readonly int WarmupTime = 30;
+		public readonly List<string> BannedProps = new List<string> { "models/citizen_props/hotdog01.vmdl", "models/citizen_props/newspaper01.vmdl" };
 
 		public static Game Instance
 		{
