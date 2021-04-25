@@ -1,5 +1,6 @@
 ﻿using Prophunt.Util;
 using Sandbox;
+using System;
 using System.Collections.Generic;
 
 namespace Prophunt.Rounds
@@ -11,6 +12,12 @@ namespace Prophunt.Rounds
 		public GameRound() : base()
 		{
 			RoundLength = 60 * 5;
+		}
+
+		public override void Start()
+		{
+			base.Start();
+			CheckPlayers();
 		}
 
 		public override void Tick()
@@ -27,6 +34,18 @@ namespace Prophunt.Rounds
 		public override void PlayerKilled( Player player )
 		{
 			base.PlayerKilled( player );
+			CheckPlayers();
+		}
+
+		public override void PlayerDisconnected( Player player, NetworkDisconnectionReason reason )
+		{
+			base.PlayerDisconnected( player, reason );
+			CheckPlayers();
+		}
+
+		private void CheckPlayers()
+		{
+			if ( Host.IsClient ) return;
 
 			Dictionary<Team, int> playerTeams = new Dictionary<Team, int>();
 			int aliveCount = 0;
@@ -44,6 +63,7 @@ namespace Prophunt.Rounds
 			{
 				// If everyone is dead make props win
 				Game.Instance.ChangeRound( new PostGameRound( false ) );
+				return;
 			}
 
 			int count;
