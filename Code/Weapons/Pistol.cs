@@ -3,7 +3,7 @@ using Sandbox;
 using System.Collections.Generic;
 
 [Library( "weapon_pistol" )]
-partial class Pistol : BaseWeapon
+partial class Pistol : ProphuntWeapon
 {
 	public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl";
 	public override float PrimaryRate => 10;
@@ -57,7 +57,6 @@ partial class Pistol : BaseWeapon
 			//
 			using ( Prediction.Off() )
 			{
-
 				var damage = DamageInfo.FromBullet( tr.EndPos, forward.Normal * 100, 15 )
 					.UsingTraceResult( tr )
 					.WithAttacker( Owner )
@@ -91,11 +90,6 @@ partial class Pistol : BaseWeapon
 				.Run();
 
 		yield return tr;
-	}
-
-	public void OnBulletHitEntity( Entity ent, Transform position )
-	{
-
 	}
 
 	[ClientRpc]
