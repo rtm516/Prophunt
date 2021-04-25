@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Prophunt.UI.External;
+using Sandbox;
 using Sandbox.UI;
 
 namespace Prophunt.UI
@@ -11,7 +12,7 @@ namespace Prophunt.UI
 			if ( !IsClient ) return;
 
 			// Default HUD elements
-			RootPanel.StyleSheet.Load( "/ui/SandboxHud.scss" );
+			RootPanel.StyleSheet.Load( "/ui/external/SandboxHud.scss" );
 			RootPanel.AddChild<ChatBox>();
 			RootPanel.AddChild<Health>();
 			RootPanel.AddChild<VoiceList>();

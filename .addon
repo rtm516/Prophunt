@@ -5,8 +5,7 @@
 
 	"depends": [
 		"base",
-		"rust",
-		"sandbox"
+		"rust"
 	],
 
 	"gamemodes": [
