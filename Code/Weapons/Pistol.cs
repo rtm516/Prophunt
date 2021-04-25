@@ -26,13 +26,6 @@ partial class Pistol : BaseWeapon
 		return base.CanPrimaryAttack();
 	}
 
-	public override void Reload()
-	{
-		base.Reload();
-
-		ViewModelEntity?.SetAnimParam( "reload", true );
-	}
-
 	public override void AttackPrimary()
 	{
 		TimeSincePrimaryAttack = 0;
