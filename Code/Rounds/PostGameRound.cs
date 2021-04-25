@@ -32,7 +32,7 @@ namespace Prophunt.Rounds
 		{
 			base.Tick();
 
-			if ( TimeSinceRoundStart > 10 )
+			if ( TimeSinceRoundStart > 10 && Host.IsServer )
 			{
 				foreach ( Player loopPlayer in Player.All )
 				{
