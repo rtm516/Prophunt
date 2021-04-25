@@ -6,6 +6,17 @@ namespace Prophunt.Rounds
 {
 	public partial class GameRound : BaseRound
 	{
+		public override void Tick()
+		{
+			base.Tick();
+
+			if (Host.IsServer && TimeSinceRoundStart > 60 * 5)
+			{
+				// Time ran out so props win
+				Game.Instance.ChangeRound( new PostGameRound( false ) );
+			}
+		}
+
 		public override void PlayerKilled( Player player )
 		{
 			base.PlayerKilled( player );

@@ -71,10 +71,13 @@ namespace Prophunt
 			Health = 100;
 			LifeState = LifeState.Alive;
 
-			Inventory.DeleteContents();
-			if ( Team == Team.Seeker )
+			if ( IsServer )
 			{
-				Inventory.Add( new Pistol(), true );
+				Inventory.DeleteContents();
+				if ( Team == Team.Seeker )
+				{
+					Inventory.Add( new Pistol(), true );
+				}
 			}
 
 			base.Respawn();
