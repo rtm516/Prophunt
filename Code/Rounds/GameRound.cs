@@ -6,11 +6,18 @@ namespace Prophunt.Rounds
 {
 	public partial class GameRound : BaseRound
 	{
+		public override string Name { get => "Seeking"; }
+
+		public GameRound() : base()
+		{
+			RoundLength = 60 * 5;
+		}
+
 		public override void Tick()
 		{
 			base.Tick();
 
-			if ( Host.IsServer && TimeSinceRoundStart > 60 * 5 )
+			if ( Host.IsServer && TimeSinceRoundStart > RoundLength )
 			{
 				// Time ran out so props win
 				Game.Instance.ChangeRound( new PostGameRound( false ) );

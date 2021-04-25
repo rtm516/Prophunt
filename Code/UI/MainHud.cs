@@ -26,6 +26,7 @@ namespace Prophunt.UI
 			RootPanel.AddChild<TeamName>();
 			RootPanel.AddChild<LockedDisplay>();
 			RootPanel.AddChild<SeekerBlackout>();
+			RootPanel.AddChild<RoundInfo>();
 
 			// Set the default crosshair
 			CrosshairCanvas.SetCrosshair( new StandardCrosshair() );

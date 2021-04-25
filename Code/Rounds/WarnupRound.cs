@@ -7,13 +7,20 @@ using System.Threading.Tasks;
 
 namespace Prophunt.Rounds
 {
-	class WarnupRound : BaseRound
+	public partial class WarnupRound : BaseRound
 	{
+		public override string Name { get => "Warmup"; }
+
+		public WarnupRound() : base()
+		{
+			RoundLength = 30;
+		}
+
 		public override void Tick()
 		{
 			base.Tick();
 
-			if (TimeSinceRoundStart > Game.Instance.WarmupTime && Host.IsServer)
+			if (TimeSinceRoundStart > RoundLength && Host.IsServer)
 			{
 				Game.Instance.ChangeRound( new GameRound() );
 			}

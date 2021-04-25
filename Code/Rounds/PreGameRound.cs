@@ -11,6 +11,8 @@ namespace Prophunt.Rounds
 {
 	partial class PreGameRound : BaseRound
 	{
+		public override string Name { get => "Waiting"; }
+
 		public override void Start()
 		{
 			base.Start();

@@ -6,6 +6,18 @@
     font-size: 40px;
     font-weight: bold;
     color: white;
+    z-index: 100;
+}
+
+RoundInfo {
+    position: absolute;
+    top: 76px;
+    width: 100%;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    z-index: 100;
 }
 
 LockedDisplay {
@@ -29,4 +41,5 @@ SeekerBlackout {
     width: 100%;
     height: 100%;
     background-color: #000;
+    z-index: 99;
 }

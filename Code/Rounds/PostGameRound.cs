@@ -9,6 +9,8 @@ namespace Prophunt.Rounds
 {
 	public partial class PostGameRound : BaseRound
 	{
+		public override string Name { get => "Finished"; }
+
 		[Net]
 		public bool SeekersWin { get; set; }
 

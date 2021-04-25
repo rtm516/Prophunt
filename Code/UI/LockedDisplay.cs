@@ -29,7 +29,7 @@ namespace Prophunt.UI
 			}
 			Style.Dirty();
 
-			Label.SetText( player.Locked ? "🔒" : "🔓" );
+			Label.SetText( player.Locked ? "\ud83d\udd12" : "\ud83d\udd13" );
 		}
 	}
 }
