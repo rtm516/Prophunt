@@ -14,7 +14,7 @@ namespace Prophunt.Entities
 		{
 			if ( user is ProphuntPlayer player )
 			{
-				return player.Team == Util.Team.Prop;
+				return player.Team == Util.Team.Prop && this.GetModelName() != "models/citizen_props/hotdog01.vmdl" && this.GetModelName() != "models/citizen_props/newspaper01.vmdl";
 			}
 
 			return false;

@@ -1,6 +1,9 @@
 ﻿using Prophunt.Util;
 using Sandbox;
 using Sandbox.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Prophunt.Rounds
 {
@@ -24,7 +27,7 @@ namespace Prophunt.Rounds
 			base.Start();
 			if ( Host.IsServer )
 			{
-				ChatBox.AddChatEntry( Player.All, "Server", $"Round over! {(SeekersWin ? "Seekers" : "Props")} win!", "/materials/prophunt/ui/system.png" );
+				Game.Instance.SystemMessage( $"Round over! {(SeekersWin ? "Seekers" : "Props")} win!" );
 			}
 		}
 
@@ -34,13 +37,7 @@ namespace Prophunt.Rounds
 
 			if ( TimeSinceRoundStart > 10 && Host.IsServer )
 			{
-				foreach ( Player loopPlayer in Player.All )
-				{
-					(loopPlayer as ProphuntPlayer).Team = Rand.Int( 1 ) == 0 ? Team.Seeker : Team.Prop;
-					loopPlayer.Respawn();
-				}
-
-				Game.Instance.ChangeRound( new GameRound() );
+				Game.Instance.ChangeRound( new PreGameRound() );
 			}
 		}
 

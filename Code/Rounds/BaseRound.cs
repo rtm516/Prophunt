@@ -18,5 +18,9 @@ namespace Prophunt.Rounds
 		public virtual void Tick() { }
 
 		public virtual void PlayerKilled( Player player ) { }
+
+		public virtual void PlayerJoined( Player player ) { }
+
+		public virtual void PlayerDisconnected( Player player, NetworkDisconnectionReason reason ) { }
 	}
 }

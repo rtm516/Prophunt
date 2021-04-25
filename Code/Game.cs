@@ -17,6 +17,10 @@ namespace Prophunt
 		public BaseRound Round { get; set; }
 		private BaseRound _lastRound;
 
+		public readonly float SeekerPct = 0.1f;
+		public readonly int MinPlayers = 2;
+		public readonly int WarmupTime = 30;
+
 		public static Game Instance
 		{
 			get => Current as Game;
@@ -28,10 +32,9 @@ namespace Prophunt
 			if ( IsServer )
 				new MainHud();
 
-			Log.Info( IsClient.ToString() + "\t1" );
 			_ = StartTickTimer();
 
-			ChangeRound( new GameRound() );
+			ChangeRound( new PreGameRound() );
 		}
 
 		public override Player CreatePlayer() => new ProphuntPlayer();
@@ -51,10 +54,21 @@ namespace Prophunt
 			Round?.PlayerKilled( player );
 		}
 
+		public override void PlayerJoined( Player player )
+		{
+			base.PlayerJoined( player );
+			Round?.PlayerJoined( player );
+		}
+
+		public override void PlayerDisconnected( Player player, NetworkDisconnectionReason reason )
+		{
+			base.PlayerDisconnected( player, reason );
+			Round?.PlayerDisconnected( player, reason );
+		}
+
 		// Work around until ticks are implemented for Games
 		public async Task StartTickTimer()
 		{
-			Log.Info( IsClient.ToString() +  "\t2" );
 			while ( true )
 			{
 				await Task.NextPhysicsFrame();
@@ -77,6 +91,12 @@ namespace Prophunt
 					_lastRound.Start();
 				}
 			}
+		}
+
+		public void SystemMessage( String message )
+		{
+			Host.AssertServer();
+			ChatBox.AddChatEntry( Player.All, "Server", message, "/materials/prophunt/ui/system.png" );
 		}
 	}
 }

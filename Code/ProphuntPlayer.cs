@@ -27,7 +27,7 @@ namespace Prophunt
 		{
 			base.Spawn();
 
-			Team = Rand.Int( 1 ) == 0 ? Team.Seeker : Team.Prop;
+			Team = Team.Spectator;
 		}
 
 		internal void OnPropUse( Entities.Prop prop )
@@ -59,7 +59,7 @@ namespace Prophunt
 		{
 			SetModel( "models/citizen/citizen.vmdl" );
 
-			Controller = Team == Team.Spectator ? new NoclipController() : new WalkController();
+			Controller = Team == Team.Spectator ? new NoclipController() : Team == Team.Seeker ? new SeekerController() : new WalkController();
 			Animator = new StandardPlayerAnimator();
 			Camera = new FirstPersonCamera();
 
