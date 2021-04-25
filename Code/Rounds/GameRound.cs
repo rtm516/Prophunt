@@ -11,7 +11,7 @@ namespace Prophunt.Rounds
 
 		public GameRound() : base()
 		{
-			RoundLength = 60 * 5;
+			RoundLength = Config.GameRoundLength;
 		}
 
 		public override void Start()

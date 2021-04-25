@@ -81,13 +81,18 @@ namespace Prophunt
 					.Ignore( this )
 					.Run();
 
-				if ( tr.Hit && tr.Body.IsValid() && tr.Entity is Sandbox.Prop && tr.Body.BodyType == PhysicsBodyType.Dynamic && !Game.Instance.BannedProps.Contains( (tr.Entity as Sandbox.Prop).GetModelName() ) )
+				if ( tr.Hit && tr.Body.IsValid() && tr.Entity is Sandbox.Prop && tr.Body.BodyType == PhysicsBodyType.Dynamic && !Config.BannedProps.Contains( (tr.Entity as Sandbox.Prop).GetModelName() ) )
 				{
 					Target = tr.Entity as Sandbox.Prop;
 				}
 				else
 				{
 					Target = null;
+				}
+
+				if ( TimeSinceLastTaunt > Config.TauntInterval )
+				{
+					Taunt();
 				}
 			}
 

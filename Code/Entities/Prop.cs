@@ -14,7 +14,7 @@ namespace Prophunt.Entities
 		{
 			if ( user is ProphuntPlayer player )
 			{
-				return player.Team == Util.Team.Prop && !Game.Instance.BannedProps.Contains(GetModelName());
+				return player.Team == Util.Team.Prop && !Config.BannedProps.Contains(GetModelName());
 			}
 
 			return false;

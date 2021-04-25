@@ -17,10 +17,6 @@ namespace Prophunt
 		public BaseRound Round { get; set; }
 		private BaseRound _lastRound;
 
-		public readonly float SeekerPct = 0.1f;
-		public readonly int MinPlayers = 2;
-		public readonly List<string> BannedProps = new List<string> { "models/citizen_props/hotdog01.vmdl", "models/citizen_props/newspaper01.vmdl" };
-
 		public static Game Instance
 		{
 			get => Current as Game;

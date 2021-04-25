@@ -36,9 +36,9 @@ namespace Prophunt.Rounds
 			if ( Host.IsClient ) return;
 
 			int playerCount = Player.All.Count;
-			if ( playerCount >= Game.Instance.MinPlayers )
+			if ( playerCount >= Config.MinPlayers )
 			{
-				List<Player> seekers = Player.All.OrderBy( x => Rand.Float() ).Take( (int)Math.Ceiling( playerCount * Game.Instance.SeekerPct ) ).ToList();
+				List<Player> seekers = Player.All.OrderBy( x => Rand.Float() ).Take( (int)Math.Ceiling( playerCount * Config.SeekerPct ) ).ToList();
 
 				foreach ( Player loopPlayer in Player.All )
 				{
@@ -50,7 +50,7 @@ namespace Prophunt.Rounds
 			}
 			else
 			{
-				Game.Instance.SystemMessage( $"Need {Game.Instance.MinPlayers - playerCount} more players to start! ({playerCount}/{Game.Instance.MinPlayers})" );
+				Game.Instance.SystemMessage( $"Need {Config.MinPlayers - playerCount} more players to start! ({playerCount}/{Config.MinPlayers})" );
 			}
 		}
 	}

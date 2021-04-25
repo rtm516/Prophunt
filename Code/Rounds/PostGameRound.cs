@@ -17,11 +17,13 @@ namespace Prophunt.Rounds
 		public PostGameRound() : base()
 		{
 			SeekersWin = false;
+			RoundLength = Config.PostGameRoundLength;
 		}
 
 		public PostGameRound( bool seekersWin ) : base()
 		{
 			SeekersWin = seekersWin;
+			RoundLength = Config.PostGameRoundLength;
 		}
 
 		public override void Start()
@@ -37,7 +39,7 @@ namespace Prophunt.Rounds
 		{
 			base.Tick();
 
-			if ( TimeSinceRoundStart > 10 && Host.IsServer )
+			if ( TimeSinceRoundStart > RoundLength && Host.IsServer )
 			{
 				Game.Instance.ChangeRound( new PreGameRound() );
 			}

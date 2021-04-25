@@ -13,7 +13,7 @@ namespace Prophunt.Rounds
 
 		public WarnupRound() : base()
 		{
-			RoundLength = 30;
+			RoundLength = Config.WarmupRoundLength;
 		}
 
 		public override void Tick()
