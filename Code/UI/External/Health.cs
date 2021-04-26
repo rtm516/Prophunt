@@ -12,7 +12,7 @@ namespace Prophunt.UI.External
         {
             object Health2 = Add.Label("💓", "icon");
             Label = Add.Label("100", "value");
-            if (player.Health) = 10f;
+            if (player.Health) = 10f; // if the player health is under 10 change gui to broken heart
                     {
                 Health2 = Add.Label("💔", "icon";)
             }
