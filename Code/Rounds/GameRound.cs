@@ -40,18 +40,19 @@ namespace Prophunt.Rounds
 		public override void PlayerDisconnected( Player player, NetworkDisconnectionReason reason )
 		{
 			base.PlayerDisconnected( player, reason );
-			CheckPlayers();
+			CheckPlayers( player );
 		}
 
-		private void CheckPlayers()
+		private void CheckPlayers( Player ignored = null )
 		{
 			if ( Host.IsClient ) return;
 
 			Dictionary<Team, int> playerTeams = new();
 			int aliveCount = 0;
-			foreach ( Player loopPlayer in Player.All )
+			foreach ( Player player in Player.All )
 			{
-				ProphuntPlayer prophuntPlayer = loopPlayer as ProphuntPlayer;
+				if ( player == ignored ) continue;
+				ProphuntPlayer prophuntPlayer = player as ProphuntPlayer;
 				if ( prophuntPlayer.Team != Team.Spectator )
 				{
 					aliveCount++;

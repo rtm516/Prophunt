@@ -1,4 +1,5 @@
-﻿using Prophunt.Utils;
+﻿using Prophunt.Players;
+using Prophunt.Utils;
 using Sandbox;
 
 namespace Prophunt.Rounds
@@ -28,6 +29,19 @@ namespace Prophunt.Rounds
 			if ( Host.IsServer )
 			{
 				Game.SystemMessage( $"Round over! {(SeekersWin ? "Seekers" : "Props")} win!" );
+			}
+		}
+
+		public override void Finish()
+		{
+			base.Finish();
+			if ( Host.IsServer )
+			{
+				foreach ( Player player in Player.All )
+				{
+					(player as ProphuntPlayer).Team = Team.Spectator;
+					player.Respawn();
+				}
 			}
 		}
 

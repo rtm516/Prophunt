@@ -14,6 +14,7 @@ namespace Prophunt.Rounds
 		public override void Start()
 		{
 			base.Start();
+
 			CheckReady();
 		}
 
@@ -26,22 +27,24 @@ namespace Prophunt.Rounds
 		public override void PlayerDisconnected( Player player, NetworkDisconnectionReason reason )
 		{
 			base.PlayerDisconnected( player, reason );
-			CheckReady();
+			CheckReady( player );
 		}
 
-		private void CheckReady()
+		private void CheckReady( Player ignored = null )
 		{
 			if ( Host.IsClient ) return;
 
 			int playerCount = Player.All.Count;
 			if ( playerCount >= Config.MinPlayers )
 			{
-				List<Player> seekers = Player.All.OrderBy( x => Rand.Float() ).Take( (int)Math.Ceiling( playerCount * Config.SeekerPct ) ).ToList();
+				List<Player> allPlayers = Player.All.Where( player => player != ignored ).ToList();
 
-				foreach ( Player loopPlayer in Player.All )
+				List<Player> seekers = allPlayers.OrderBy( x => Rand.Float() ).Take( (int)Math.Ceiling( playerCount * Config.SeekerPct ) ).ToList();
+
+				foreach ( Player player in allPlayers )
 				{
-					(loopPlayer as ProphuntPlayer).Team = seekers.Remove( loopPlayer ) ? Team.Seeker : Team.Prop;
-					loopPlayer.Respawn();
+					(player as ProphuntPlayer).Team = seekers.Remove( player ) ? Team.Seeker : Team.Prop;
+					player.Respawn();
 				}
 
 				Game.Instance.ChangeRound( new WarnupRound() );
