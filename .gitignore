@@ -534,6 +534,6 @@ FodyWeavers.xsd
 
 *.csproj
 Properties/launchSettings.json
-content/tools_asset_info.bin
-content/tools_thumbnail_cache.bin
+tools_asset_info.bin
+tools_thumbnail_cache.bin
 code/accesslist.txt
