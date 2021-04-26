@@ -27,6 +27,7 @@ namespace Prophunt.UI
 			RootPanel.AddChild<LockedDisplay>();
 			RootPanel.AddChild<SeekerBlackout>();
 			RootPanel.AddChild<RoundInfo>();
+			RootPanel.AddChild<TauntTimer>();
 
 			// Set the default crosshair
 			CrosshairCanvas.SetCrosshair( new StandardCrosshair() );

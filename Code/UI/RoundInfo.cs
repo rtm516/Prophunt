@@ -1,4 +1,5 @@
-﻿using Prophunt.Util;
+﻿using Prophunt.Players;
+using Prophunt.Utils;
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
@@ -22,8 +23,7 @@ namespace Prophunt.UI
 			String timeText = "\x221E";
 			if ( Game.Instance.Round.RoundLength != -1 )
 			{
-				int timeLeft = (int)Math.Ceiling( Game.Instance.Round.RoundLength - Game.Instance.Round.TimeSinceRoundStart );
-				timeText = ((int)Math.Floor( timeLeft / 60f )).ToString().PadLeft( 2, '0' ) + ":" + (timeLeft % 60).ToString().PadLeft( 2, '0' );
+				timeText = ( Game.Instance.Round.RoundLength - Game.Instance.Round.TimeSinceRoundStart ).ToTimeString();
 			}
 			Timer.SetText( $"{Game.Instance.Round.Name} - {timeText}" );
 		}
