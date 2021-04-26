@@ -1,12 +1,13 @@
-﻿using Sandbox;
-using System;
-using Prophunt.Util;
+﻿using System;
+using Prophunt.Utils;
+using Sandbox;
+using Prop = Prophunt.Entities.Prop;
 
-namespace Prophunt
+namespace Prophunt.Players
 {
-	partial class ProphuntPlayer
+	internal partial class ProphuntPlayer
 	{
-		internal void OnPropUse( Entities.Prop prop )
+		internal void OnPropUse( Prop prop )
 		{
 			if ( !(Animator is PropAnimator) )
 			{

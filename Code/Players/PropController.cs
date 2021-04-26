@@ -1,12 +1,12 @@
 ﻿using Sandbox;
 
-namespace Prophunt
+namespace Prophunt.Players
 {
-	class PropController : WalkController
+	internal class PropController : WalkController
 	{
 		public override BBox GetHull()
 		{
-			return new BBox(mins, maxs);
+			return new(mins, maxs);
 		}
 
 		public override void UpdateBBox()

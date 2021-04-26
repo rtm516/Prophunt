@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Prophunt.Util
+﻿namespace Prophunt.Utils
 {
 	public enum Team
 	{
@@ -17,20 +11,13 @@ namespace Prophunt.Util
 	{
 		internal static string GetName( this Team team )
 		{
-			switch ( team )
+			return team switch
 			{
-				case Team.Prop:
-					return "Prop";
-
-				case Team.Seeker:
-					return "Seeker";
-
-				case Team.Spectator:
-					return "Spectator";
-
-				default:
-					return "";
-			}
+				Team.Prop => "Prop",
+				Team.Seeker => "Seeker",
+				Team.Spectator => "Spectator",
+				_ => ""
+			};
 		}
 	}
 }

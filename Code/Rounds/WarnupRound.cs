@@ -1,9 +1,5 @@
-﻿using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Prophunt.Utils;
+using Sandbox;
 
 namespace Prophunt.Rounds
 {
@@ -20,7 +16,7 @@ namespace Prophunt.Rounds
 		{
 			base.Tick();
 
-			if (TimeSinceRoundStart > RoundLength && Host.IsServer)
+			if ( TimeSinceRoundStart > RoundLength && Host.IsServer )
 			{
 				Game.Instance.ChangeRound( new GameRound() );
 			}

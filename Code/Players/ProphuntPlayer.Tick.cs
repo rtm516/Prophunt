@@ -1,10 +1,9 @@
-﻿using Sandbox;
-using System;
-using Prophunt.Util;
+﻿using Prophunt.Utils;
+using Sandbox;
 
-namespace Prophunt
+namespace Prophunt.Players
 {
-	partial class ProphuntPlayer
+	internal partial class ProphuntPlayer
 	{
 		[Net]
 		private Prop Target { get; set; }
@@ -20,6 +19,7 @@ namespace Prophunt
 				{
 					_Target.GlowActive = false;
 				}
+
 				_Target = Target;
 				if ( _Target.IsValid() )
 				{
@@ -49,7 +49,6 @@ namespace Prophunt
 
 		private void TickSpectator()
 		{
-
 		}
 
 		private void TickPlayer()
@@ -104,7 +103,6 @@ namespace Prophunt
 
 		private void TickSeeker()
 		{
-
 		}
 	}
 }

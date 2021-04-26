@@ -1,9 +1,8 @@
-﻿using Prophunt.Rounds;
-using Prophunt.Util;
+﻿using Prophunt.Players;
+using Prophunt.Rounds;
+using Prophunt.Utils;
 using Sandbox;
 using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
 
 namespace Prophunt.UI
 {
@@ -15,8 +14,7 @@ namespace Prophunt.UI
 
 		public override void Tick()
 		{
-			var player = Player.Local as ProphuntPlayer;
-			if ( player == null ) return;
+			if ( Player.Local is not ProphuntPlayer player ) return;
 
 			if ( player.Team == Team.Seeker && Game.Instance.Round is WarnupRound )
 			{
@@ -26,6 +24,7 @@ namespace Prophunt.UI
 			{
 				Style.Display = DisplayMode.None;
 			}
+
 			Style.Dirty();
 		}
 	}

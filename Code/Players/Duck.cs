@@ -1,11 +1,6 @@
 ﻿using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Prophunt
+namespace Prophunt.Players
 {
 	[Library]
 	public class Duck : Sandbox.Duck
@@ -16,7 +11,6 @@ namespace Prophunt
 
 		public override void PreTick()
 		{
-			
 		}
 	}
 }

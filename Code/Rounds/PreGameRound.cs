@@ -1,15 +1,13 @@
-﻿using Prophunt.Util;
-using Sandbox;
-using Sandbox.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Prophunt.Players;
+using Prophunt.Utils;
+using Sandbox;
 
 namespace Prophunt.Rounds
 {
-	partial class PreGameRound : BaseRound
+	internal class PreGameRound : BaseRound
 	{
 		public override string Name { get => "Waiting"; }
 
@@ -50,7 +48,7 @@ namespace Prophunt.Rounds
 			}
 			else
 			{
-				Game.Instance.SystemMessage( $"Need {Config.MinPlayers - playerCount} more players to start! ({playerCount}/{Config.MinPlayers})" );
+				Game.SystemMessage( $"Need {Config.MinPlayers - playerCount} more players to start! ({playerCount}/{Config.MinPlayers})" );
 			}
 		}
 	}

@@ -1,9 +1,5 @@
-﻿using Prophunt.Util;
+﻿using Prophunt.Utils;
 using Sandbox;
-using Sandbox.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Prophunt.Rounds
 {
@@ -31,7 +27,7 @@ namespace Prophunt.Rounds
 			base.Start();
 			if ( Host.IsServer )
 			{
-				Game.Instance.SystemMessage( $"Round over! {(SeekersWin ? "Seekers" : "Props")} win!" );
+				Game.SystemMessage( $"Round over! {(SeekersWin ? "Seekers" : "Props")} win!" );
 			}
 		}
 
@@ -44,6 +40,5 @@ namespace Prophunt.Rounds
 				Game.Instance.ChangeRound( new PreGameRound() );
 			}
 		}
-
 	}
 }

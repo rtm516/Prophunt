@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Prophunt
+namespace Prophunt.Utils
 {
 	internal static class Config
 	{
@@ -12,14 +12,16 @@ namespace Prophunt
 		public static int GameRoundLength = 60 * 5;
 		public static int PostGameRoundLength = 10;
 
-		public static int TauntInterval = 5;
+		public static int TauntInterval = 30;
 
-		public static List<string> BannedProps = new List<string> {
+		public static List<string> BannedProps = new()
+		{
 			"models/citizen_props/hotdog01.vmdl",
 			"models/citizen_props/newspaper01.vmdl"
 		};
 
-		public static List<string> Taunts = new List<string> {
+		public static List<string> Taunts = new()
+		{
 			"sounds/footsteps/footstep-concrete.sound",
 			"sounds/footsteps/footstep-metal.sound",
 			"sounds/footsteps/footstep-wood.sound"

@@ -1,13 +1,9 @@
-﻿using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Prophunt.Utils;
+using Sandbox;
 
-namespace Prophunt
+namespace Prophunt.Players
 {
-	partial class ProphuntPlayer
+	internal partial class ProphuntPlayer
 	{
 		private ModelEntity hat;
 		private ModelEntity jacket;
@@ -18,7 +14,10 @@ namespace Prophunt
 		{
 			UnDress();
 
-			if ( Team != Util.Team.Seeker ) return;
+			if ( Team != Team.Seeker )
+			{
+				return;
+			}
 
 			hat = new ModelEntity();
 			hat.SetModel( "models/citizen_clothes/hat/hat_uniform.police.vmdl" );

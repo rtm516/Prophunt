@@ -1,9 +1,6 @@
-﻿using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Prophunt.Players;
+using Prophunt.Utils;
+using Sandbox;
 
 namespace Prophunt.Entities
 {
@@ -14,7 +11,7 @@ namespace Prophunt.Entities
 		{
 			if ( user is ProphuntPlayer player )
 			{
-				return player.Team == Util.Team.Prop && !Config.BannedProps.Contains(GetModelName());
+				return player.Team == Team.Prop && !Config.BannedProps.Contains( GetModelName() );
 			}
 
 			return false;

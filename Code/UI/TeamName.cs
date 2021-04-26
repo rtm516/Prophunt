@@ -1,4 +1,5 @@
-﻿using Prophunt.Util;
+﻿using Prophunt.Players;
+using Prophunt.Utils;
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
@@ -16,8 +17,7 @@ namespace Prophunt.UI
 		}
 		public override void Tick()
 		{
-			var player = Player.Local as ProphuntPlayer;
-			if ( player == null ) return;
+			if ( Player.Local is not ProphuntPlayer player ) return;
 
 			Team.SetText( Enum.GetName( typeof( Team ), player.Team ) );
 		}

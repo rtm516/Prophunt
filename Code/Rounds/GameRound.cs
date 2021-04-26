@@ -1,6 +1,6 @@
-﻿using Prophunt.Util;
+﻿using Prophunt.Players;
+using Prophunt.Utils;
 using Sandbox;
-using System;
 using System.Collections.Generic;
 
 namespace Prophunt.Rounds
@@ -47,7 +47,7 @@ namespace Prophunt.Rounds
 		{
 			if ( Host.IsClient ) return;
 
-			Dictionary<Team, int> playerTeams = new Dictionary<Team, int>();
+			Dictionary<Team, int> playerTeams = new();
 			int aliveCount = 0;
 			foreach ( Player loopPlayer in Player.All )
 			{
@@ -66,13 +66,12 @@ namespace Prophunt.Rounds
 				return;
 			}
 
-			int count;
-			if ( !playerTeams.TryGetValue( Team.Prop, out count ) )
+			if ( !playerTeams.TryGetValue( Team.Prop, out _ ) )
 			{
 				// Seekers win
 				Game.Instance.ChangeRound( new PostGameRound( true ) );
 			}
-			else if ( !playerTeams.TryGetValue( Team.Seeker, out count ) )
+			else if ( !playerTeams.TryGetValue( Team.Seeker, out _ ) )
 			{
 				// Props win
 				Game.Instance.ChangeRound( new PostGameRound( false ) );

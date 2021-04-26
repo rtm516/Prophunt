@@ -1,17 +1,14 @@
-﻿using Prophunt.Rounds;
+﻿using System.Threading.Tasks;
+using Prophunt.Players;
+using Prophunt.Rounds;
 using Prophunt.UI;
-using Prophunt.Util;
 using Sandbox;
 using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Prophunt
 {
 	[Library( "prophunt", Title = "Prophunt" )]
-	partial class Game : Sandbox.Game
+	internal partial class Game : Sandbox.Game
 	{
 		[Net]
 		public BaseRound Round { get; set; }
@@ -26,7 +23,7 @@ namespace Prophunt
 		{
 			Log.Info( "Game Started" );
 			if ( IsServer )
-				new MainHud();
+				_ = new MainHud();
 
 			_ = StartTickTimer();
 
@@ -89,7 +86,7 @@ namespace Prophunt
 			}
 		}
 
-		public void SystemMessage( String message )
+		public static void SystemMessage( string message )
 		{
 			Host.AssertServer();
 			ChatBox.AddChatEntry( Player.All, "Server", message, "/materials/prophunt/ui/system.png" );

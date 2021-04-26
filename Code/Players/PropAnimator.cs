@@ -1,9 +1,8 @@
-﻿using Prophunt;
-using Sandbox;
+﻿using Sandbox;
 
-namespace Prophunt
+namespace Prophunt.Players
 {
-	class PropAnimator : StandardPlayerAnimator
+	internal class PropAnimator : StandardPlayerAnimator
 	{
 		private Rotation LastRotation;
 
@@ -13,6 +12,7 @@ namespace Prophunt
 			{
 				LastRotation = idealRotation;
 			}
+
 			Rot = LastRotation;
 		}
 	}

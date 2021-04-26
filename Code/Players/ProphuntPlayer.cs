@@ -1,9 +1,9 @@
-﻿using Prophunt.Util;
+﻿using Prophunt.Utils;
 using Sandbox;
 
-namespace Prophunt
+namespace Prophunt.Players
 {
-	partial class ProphuntPlayer : BasePlayer
+	internal partial class ProphuntPlayer : BasePlayer
 	{
 		[Net]
 		public Team Team { get; set; }

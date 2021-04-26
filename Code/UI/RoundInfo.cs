@@ -17,8 +17,7 @@ namespace Prophunt.UI
 		}
 		public override void Tick()
 		{
-			var player = Player.Local as ProphuntPlayer;
-			if ( player == null ) return;
+			if ( Player.Local is not ProphuntPlayer ) return;
 
 			String timeText = "\x221E";
 			if ( Game.Instance.Round.RoundLength != -1 )
