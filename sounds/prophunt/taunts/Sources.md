@@ -15,3 +15,6 @@ From https://github.com/kowalski7cc/prophunt-hidenseek-original/tree/master/game
 * woohoo
 * you_dont_know_the_power
 * you_underestimate_the_power
+
+From Portal (valve)
+* turret_taunt
