@@ -22,9 +22,22 @@ namespace Prophunt.Utils
 
 		public static List<string> Taunts = new()
 		{
-			"sounds/footsteps/footstep-concrete.sound",
-			"sounds/footsteps/footstep-metal.sound",
-			"sounds/footsteps/footstep-wood.sound"
+			"firework",
+
+			// Ported from the original
+			"boom_headshot",
+			"doh",
+			"go_away_or_i_shall",
+			"ill_be_back",
+			"negative",
+			"oh_yea_he_will_pay",
+			"ok_i_will_tell_you",
+			"please_come_again",
+			"threat_neutralized",
+			"what_is_wrong_with_you",
+			"woohoo",
+			"you_dont_know_the_power",
+			"you_underestimate_the_power"
 		};
 	}
 }

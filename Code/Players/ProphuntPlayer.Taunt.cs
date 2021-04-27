@@ -10,7 +10,13 @@ namespace Prophunt.Players
 
 		protected override void UseFail()
 		{
-			Taunt();
+			if (Team == Team.Prop) {
+				Taunt();
+			}
+			else
+			{
+				base.UseFail();
+			}
 		}
 
 		private void Taunt( string path = null )
