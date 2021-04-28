@@ -27,7 +27,7 @@ namespace Prophunt.Players
 		{
 			SetModel( "models/citizen/citizen.vmdl" );
 
-			Controller = Team == Team.Spectator ? new NoclipController() : Team == Team.Seeker ? new SeekerController() : new WalkController();
+			Controller = Team == Team.Spectator ? new SpectatorController() : Team == Team.Seeker ? new SeekerController() : new WalkController();
 			Animator = new StandardPlayerAnimator();
 			Camera = new FirstPersonCamera();
 

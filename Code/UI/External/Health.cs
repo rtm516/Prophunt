@@ -1,4 +1,6 @@
-﻿using Sandbox;
+﻿using Prophunt.Players;
+using Prophunt.Utils;
+using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
@@ -16,8 +18,17 @@ namespace Prophunt.UI.External
 
 		public override void Tick()
 		{
-			var player = Player.Local;
-			if ( player == null ) return;
+			if ( Player.Local is not ProphuntPlayer player ) return;
+
+			if ( player.Team != Team.Prop )
+			{
+				Style.Display = DisplayMode.None;
+			}
+			else
+			{
+				Style.Display = DisplayMode.Flex;
+			}
+			Style.Dirty();
 
 			Label.Text = $"{player.Health:n0}";
 		}

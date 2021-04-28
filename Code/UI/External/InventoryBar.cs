@@ -1,6 +1,8 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using System.Collections.Generic;
+using Prophunt.Players;
+using Prophunt.Utils;
 
 namespace Prophunt.UI.External
 {
@@ -21,9 +23,18 @@ namespace Prophunt.UI.External
 		{
 			base.Tick();
 
-			var player = Player.Local;
-			if ( player == null ) return;
+			if ( Player.Local is not ProphuntPlayer player ) return;
 			if ( player.Inventory == null ) return;
+
+			if ( player.Team != Team.Prop )
+			{
+				Style.Display = DisplayMode.None;
+			}
+			else
+			{
+				Style.Display = DisplayMode.Flex;
+			}
+			Style.Dirty();
 
 			for ( int i = 0; i < slots.Count; i++ )
 			{
