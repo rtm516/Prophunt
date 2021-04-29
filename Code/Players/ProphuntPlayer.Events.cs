@@ -30,6 +30,13 @@ namespace Prophunt.Players
 			float height = (float)Math.Round( CollisionBounds.Maxs.z - CollisionBounds.Mins.z );
 
 			(Controller as WalkController).SetBBox( new Vector3( xyMaxInverted, xyMaxInverted, 0 ), new Vector3( xyMax, xyMax, height ) );
+
+			// Prevent players falling through the world
+			TraceResult tr = (Controller as WalkController).TraceBBox( Pos + Vector3.Up * CollisionBounds.Maxs.z, Pos + Vector3.Down * CollisionBounds.Maxs.z );
+			if ( tr.Hit )
+			{
+				Pos = tr.EndPos;
+			}
 		}
 
 		public override void OnKilled()
