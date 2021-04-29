@@ -4,7 +4,7 @@ namespace Prophunt.Utils
 {
 	internal static class Config
 	{
-		public static float SeekerPct = 0.1f;
+		public static float SeekerPct = 0.25f;
 
 		public static int MinPlayers = 2;
 
