@@ -18,6 +18,33 @@ namespace Prophunt.Rounds
 			CheckReady();
 		}
 
+		public override void Finish()
+		{
+			base.Finish();
+
+			if ( Host.IsClient ) return;
+
+			// Remove existing props
+			foreach ( Entity entity in Entity.All )
+			{
+				if ( entity is Prop prop && (entity.ClassInfo.Name == "prop_physics" || entity.ClassInfo.Name == "ph_prop_physics") )
+				{
+					entity.Delete();
+				}
+			}
+
+			// Spawn map props
+			foreach ( MapProp mapProp in Game.Instance.MapProps )
+			{
+				Prop prop = Library.Create<Entity>( mapProp.ClassName ) as Prop;
+				prop.SetModel( mapProp.Model );
+				prop.WorldPos = mapProp.Position;
+				prop.WorldRot = mapProp.Rotation;
+				prop.WorldScale = mapProp.Scale;
+				prop.RenderColor = mapProp.Color;
+			}
+		}
+
 		public override void PlayerJoined( Player player )
 		{
 			base.PlayerJoined( player );

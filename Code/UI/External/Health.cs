@@ -20,16 +20,6 @@ namespace Prophunt.UI.External
 		{
 			if ( Player.Local is not ProphuntPlayer player ) return;
 
-			if ( player.Team != Team.Prop )
-			{
-				Style.Display = DisplayMode.None;
-			}
-			else
-			{
-				Style.Display = DisplayMode.Flex;
-			}
-			Style.Dirty();
-
 			Label.Text = $"{player.Health:n0}";
 		}
 	}
