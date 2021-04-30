@@ -26,7 +26,7 @@ namespace Prophunt.UI.External
 			if ( Player.Local is not ProphuntPlayer player ) return;
 			if ( player.Inventory == null ) return;
 
-			if ( player.Team != Team.Prop )
+			if ( player.Team != Team.Seeker )
 			{
 				Style.Display = DisplayMode.None;
 			}
