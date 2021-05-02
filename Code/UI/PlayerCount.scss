@@ -1,0 +1,32 @@
+// @import "./colors.scss";
+// @import url("http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:300,400italic,700italic,400,700");
+
+PlayerCount {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  justify-content: center;
+
+  .PlayerCountDisplay {
+    width: 250px;
+    height: 80px;
+    border-radius: 40px;
+    // transform: translate(-50%, 0);
+    background-color: gray;
+    background-image: linear-gradient(65deg, #d66f34 50%, #2d7233 50%);
+    background-size: 270px 100px;
+    border: 2px solid white;
+
+    justify-content: space-between;
+    flex-direction: row;
+
+    .Seekers, .Props {
+      width: 50%;
+      color: white;
+      font-size: 45px;
+      font-family: OpenSans;
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+}

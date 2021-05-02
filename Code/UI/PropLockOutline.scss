@@ -1,0 +1,11 @@
+// @import "./colors.scss";
+
+PropLockOutline {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  &.PropLockOn {
+    border: 2px solid #e7d466;
+  }
+}

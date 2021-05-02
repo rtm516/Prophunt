@@ -35,7 +35,7 @@ namespace Prophunt
 
 			foreach (Entity entity in Entity.All)
 			{
-				if ( entity is Prop prop && (entity.ClassInfo.Name == "prop_physics" || entity.ClassInfo.Name == "ph_prop_physics" ))
+				if ( entity is Prop prop && entity.ClassInfo != null && (entity.ClassInfo.Name == "prop_physics" || entity.ClassInfo.Name == "ph_prop_physics" ))
 				{
 					MapProp mapProp = new MapProp();
 

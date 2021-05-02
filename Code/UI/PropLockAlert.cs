@@ -3,18 +3,17 @@ using Prophunt.Utils;
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System;
 
 namespace Prophunt.UI
 {
-	public class TauntTimer : Panel
+	public class PropLockAlert : Panel
 	{
-		private Label Label;
-
-		public TauntTimer()
+		public PropLockAlert()
 		{
-			Label = Add.Label("", "value" );
+			Add.Label( "Rotation Locked!", "Title" );
+			Add.Label( "Press RMB to unlock", "Instruction" );
 		}
+
 		public override void Tick()
 		{
 			if ( Player.Local is not ProphuntPlayer player ) return;
@@ -27,9 +26,10 @@ namespace Prophunt.UI
 			{
 				Style.Display = DisplayMode.Flex;
 			}
-			Style.Dirty();
 
-			Label.SetText( (Config.TauntInterval - player.TimeSinceLastTaunt).ToTimeString() );
+			SetClass( "PropLockOn", player.Locked );
+
+			Style.Dirty();
 		}
 	}
 }
