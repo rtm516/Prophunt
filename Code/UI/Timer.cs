@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Prophunt;
 using Prophunt.Utils;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
@@ -17,6 +12,8 @@ namespace Prophunt.UI
 
 		public Timer()
 		{
+			StyleSheet.Load( "/ui/Timer.scss" );
+
 			Time = Add.Label( "", "Time" );
 			Status = Add.Label( "", "Status" );
 		}

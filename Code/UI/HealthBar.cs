@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Prophunt.Players;
+﻿using Prophunt.Players;
 using Sandbox;
 using Sandbox.UI;
 
@@ -15,6 +10,7 @@ namespace Prophunt.UI
 
 		public HealthBar()
 		{
+			StyleSheet.Load( "/ui/HealthBar.scss" );
 			HealthBarCount = Add.Panel( "HealthBarCount" );
 		}
 

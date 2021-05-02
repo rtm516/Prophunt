@@ -14,6 +14,8 @@ namespace Prophunt.UI
 
 		public PlayerCount()
 		{
+			StyleSheet.Load( "/ui/PlayerCount.scss" );
+
 			Panel panel = Add.Panel( "PlayerCountDisplay" );
 
 			Seekers = panel.Add.Label( "", "Seekers" );

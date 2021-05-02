@@ -10,6 +10,8 @@ namespace Prophunt.UI
 	{
 		public PropLockAlert()
 		{
+			StyleSheet.Load( "/ui/PropLockAlert.scss" );
+
 			Add.Label( "Rotation Locked!", "Title" );
 			Add.Label( "Press RMB to unlock", "Instruction" );
 		}

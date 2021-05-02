@@ -9,6 +9,8 @@ namespace Prophunt.UI
 	{
 		public InfoPanel()
 		{
+			StyleSheet.Load( "/ui/InfoPanel.scss" );
+
 			Panel panel = Add.Panel( "InfoPanelDisplay" );
 			panel.AddChild<PropLockAlert>();
 			panel.AddChild<HealthBar>();

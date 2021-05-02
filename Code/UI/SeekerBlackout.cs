@@ -10,6 +10,7 @@ namespace Prophunt.UI
 	{
 		public SeekerBlackout()
 		{
+			StyleSheet.Load( "/ui/SeekerBlackout.scss" );
 		}
 
 		public override void Tick()

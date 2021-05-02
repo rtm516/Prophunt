@@ -1,5 +1,4 @@
-﻿
-using Prophunt.Players;
+﻿using Prophunt.Players;
 using Prophunt.Utils;
 using Sandbox;
 using Sandbox.UI;
@@ -8,6 +7,11 @@ namespace Prophunt.UI
 {
 	public class PropLockOutline : Panel
 	{
+		public PropLockOutline()
+		{
+			StyleSheet.Load( "/ui/PropLockOutline.scss" );
+		}
+
 		public override void Tick()
 		{
 			if ( Player.Local is not ProphuntPlayer player ) return;

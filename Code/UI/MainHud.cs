@@ -1,5 +1,4 @@
-﻿using Prophunt.UI.External;
-using Sandbox;
+﻿using Sandbox;
 using Sandbox.UI;
 
 namespace Prophunt.UI
@@ -14,20 +13,18 @@ namespace Prophunt.UI
 			// Default HUD elements
 			RootPanel.StyleSheet.Load( "/ui/external/SandboxHud.scss" );
 			RootPanel.AddChild<ChatBox>();
-			RootPanel.AddChild<Health>();
 			RootPanel.AddChild<VoiceList>();
 			RootPanel.AddChild<KillFeed>();
 			RootPanel.AddChild<Scoreboard<ScoreboardEntry>>();
 			RootPanel.AddChild<CrosshairCanvas>();
-			RootPanel.AddChild<InventoryBar>();
+			//RootPanel.AddChild<InventoryBar>();
 
 			// Our HUD elements
-			RootPanel.StyleSheet.Load( "/ui/MainHud.scss" );
-			RootPanel.AddChild<TeamName>();
-			RootPanel.AddChild<LockedDisplay>();
 			RootPanel.AddChild<SeekerBlackout>();
-			RootPanel.AddChild<RoundInfo>();
-			RootPanel.AddChild<TauntTimer>();
+			RootPanel.AddChild<PlayerCount>();
+			RootPanel.AddChild<PropLockOutline>();
+			RootPanel.AddChild<Timer>();
+			RootPanel.AddChild<InfoPanel>();
 
 			// Set the default crosshair
 			CrosshairCanvas.SetCrosshair( new StandardCrosshair() );
