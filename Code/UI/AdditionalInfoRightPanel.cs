@@ -30,7 +30,7 @@ namespace Prophunt.UI
 			{
 				if ( player.ActiveChild is not ProphuntWeapon weapon ) return;
 				Title.SetText( weapon.AmmoClip.ToString() );
-				Value.SetText( weapon.AvailableAmmo().ToString() );
+				Value.SetText( weapon.AvailableAmmoString() );
 			}
 		}
 	}

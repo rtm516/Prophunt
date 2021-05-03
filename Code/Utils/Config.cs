@@ -15,6 +15,7 @@ namespace Prophunt.Utils
 		public static int TauntMinInterval = 10;
 		public static int TauntInterval = 30;
 
+		public static int KillPoints = 20;
 		public static int TauntPoints = 10;
 
 		public static List<string> BannedProps = new()

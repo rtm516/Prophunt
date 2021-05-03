@@ -186,7 +186,7 @@ internal partial class ProphuntWeapon : BaseWeapon
 
 				if ( tr.Entity is Prop && tr.Body.BodyType == PhysicsBodyType.Dynamic )
 				{
-					var damageSelf = DamageInfo.Generic( 5 )
+					var damageSelf = DamageInfo.Generic( damage * 0.75f )
 						.WithAttacker( Owner )
 						.WithWeapon( this );
 

@@ -13,6 +13,12 @@ namespace Prophunt.Players
 		{
 			base.Tick();
 
+			// Update active weapon
+			if ( Input.ActiveChild != null )
+			{
+				ActiveChild = Input.ActiveChild;
+			}
+
 			if ( IsLocalPlayer && Target != _Target )
 			{
 				if ( _Target.IsValid() )

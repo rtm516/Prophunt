@@ -1,7 +1,4 @@
-﻿using Prophunt;
-using Prophunt.Players;
-using Sandbox;
-using System.Collections.Generic;
+﻿using Sandbox;
 
 [Library( "weapon_pistol" )]
 partial class Pistol : ProphuntWeapon
@@ -51,26 +48,5 @@ partial class Pistol : ProphuntWeapon
 		// Shoot the bullets
 		//
 		ShootBullet( 0.05f, 1.5f, 9.0f, 3.0f );
-	}
-
-	public override bool CanSecondaryAttack()
-	{
-		return base.CanPrimaryAttack() && Owner.Input.Pressed( InputButton.Attack2 );
-	}
-
-	public override void AttackSecondary()
-	{
-		TimeSinceSecondaryAttack = 0;
-
-		if ( Host.IsClient ) return;
-
-		var ent = new Prop
-		{
-			WorldPos = Owner.EyePos + Owner.EyeRot.Forward * 50,
-			WorldRot = Owner.EyeRot
-		};
-
-		ent.SetModel( "models/citizen_props/sodacan01.vmdl" );
-		ent.Velocity = Owner.EyeRot.Forward * 1000;
 	}
 }

@@ -44,6 +44,8 @@ namespace Prophunt.Players
 			Inventory.DeleteContents();
 			if ( Team == Team.Seeker )
 			{
+				Inventory.Add( new Shotgun() );
+				Inventory.Add( new SMG() );
 				Inventory.Add( new Pistol(), true );
 			}
 

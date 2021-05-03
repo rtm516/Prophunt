@@ -41,6 +41,12 @@ namespace Prophunt.Players
 
 		public override void OnKilled()
 		{
+			// Grant the attacker points
+			if ( LastAttacker is ProphuntPlayer attacker )
+			{
+				attacker.Points += Config.KillPoints;
+			}
+
 			Inventory.DeleteContents();
 			UnDress();
 
