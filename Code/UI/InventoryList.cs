@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Prophunt.Players;
 using Sandbox;
 using Sandbox.UI;
@@ -13,10 +14,7 @@ namespace Prophunt.UI
 		public InventoryList()
 		{
 			StyleSheet.Load( "/ui/InventoryList.scss" );
-
-			//Items.Add( Add.Label( "Pistol", "weapon" ) );
-			//Items.Add( Add.Label( "SMG", "weapon" ) );
-			//Items.Add( Add.Label( "Shotgun", "weapon" ) );
+			Items.Clear();
 		}
 
 		public override void Tick()
@@ -25,10 +23,18 @@ namespace Prophunt.UI
 
 			if ( Player.Local is not ProphuntPlayer player ) return;
 
-			int i;
-			for ( i = 0; i < player.Inventory.Count(); i++ )
+			IOrderedEnumerable<ProphuntWeapon> Weapons = player.Children.Select( x => x as ProphuntWeapon ).Where( x => x.IsValid() && x.IsUsable() ).OrderBy( x => x.BucketWeight );
+
+			int i = 0;
+
+			// Reload work around
+			if ( Items[i].Parent != this )
 			{
-				ProphuntWeapon weapon = player.Inventory.GetSlot( i ) as ProphuntWeapon;
+				Items.Clear();
+			}
+
+			foreach ( ProphuntWeapon weapon in Weapons )
+			{
 				if ( i > Items.Count - 1 || Items[i] is not Label )
 				{
 					Items.Add( Add.Label( weapon.ToString(), "weapon" ) );
@@ -39,7 +45,8 @@ namespace Prophunt.UI
 				}
 
 				Items[i].SetClass( "selected", weapon.IsActiveChild() );
-				Items[i].AddClass( "weapon" );
+
+				i++;
 			}
 
 			for ( int j = i; j < Items.Count; j++ )

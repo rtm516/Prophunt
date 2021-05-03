@@ -10,19 +10,18 @@
 
     .weapon {
         padding: 10px;
+        font-size: 25px;
+        width: 150px;
+
+        background-size: 100% 100px;
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
         background-repeat: no-repeat;
-        font-size: 25px;
-        // margin-top: 1px;
-        width: 150px;
-        background-size: 100% 100px;
-
+        
 		transition: all 0.5s ease-in-out;
 
         &.selected {
             font-size: 30px;
             font-weight: 700;
-
             width: 170px;
         }
     }

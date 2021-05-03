@@ -7,9 +7,9 @@ partial class Pistol : ProphuntWeapon
 
 	public override float PrimaryRate => 15.0f;
 	public override float SecondaryRate => 1.0f;
+	public override int ClipSize => 12;
 	public override float ReloadTime => 3.0f;
-
-	public override int Bucket => 1;
+	public override int BucketWeight => 1;
 
 	public override void Spawn()
 	{
