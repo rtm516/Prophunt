@@ -21,16 +21,8 @@ namespace Prophunt.UI
 		{
 			if ( Player.Local is not ProphuntPlayer player ) return;
 
-			if ( player.Team == Team.Prop )
-			{
-				Title.SetText( "Points" );
-				Value.SetText( "000" );
-			}
-			else if ( player.Team == Team.Seeker )
-			{
-				Title.SetText( "???" );
-				Value.SetText( "???" );
-			}
+			Title.SetText( "Points" );
+			Value.SetText( player.Points.ToString() );
 		}
 	}
 }

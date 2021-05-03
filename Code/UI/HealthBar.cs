@@ -1,5 +1,6 @@
 ﻿using System;
 using Prophunt.Players;
+using Prophunt.Utils;
 using Sandbox;
 using Sandbox.UI;
 
@@ -20,7 +21,7 @@ namespace Prophunt.UI
 		{
 			if ( Player.Local is not ProphuntPlayer player ) return;
 
-			SetClass( "PropLockOn", player.Locked );
+			SetClass( "PropLockOn", player.Locked && player.Team == Team.Prop );
 			Style.Dirty();
 
 			LastHealth = LastHealth.LerpTo( player.Health, Time.Delta * 4f );

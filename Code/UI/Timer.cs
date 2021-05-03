@@ -25,6 +25,7 @@ namespace Prophunt.UI
 			{
 				timeText = (Game.Instance.Round.RoundLength - Game.Instance.Round.TimeSinceRoundStart).ToTimeString();
 			}
+
 			Time.SetText( timeText );
 			Status.SetText( Game.Instance.Round.Name );
 		}

@@ -9,6 +9,8 @@ namespace Prophunt.Players
 		public Team Team { get; set; }
 		[Net]
 		public bool Locked { get; set; }
+		[Net]
+		public int Points { get; set; }
 
 		public ProphuntPlayer()
 		{

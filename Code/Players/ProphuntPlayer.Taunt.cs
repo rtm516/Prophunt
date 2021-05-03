@@ -10,8 +10,13 @@ namespace Prophunt.Players
 
 		protected override void UseFail()
 		{
-			if (Team == Team.Prop) {
-				Taunt();
+			if (Team == Team.Prop)
+			{
+				if ( TimeSinceLastTaunt > Config.TauntMinInterval )
+				{
+					Points += Config.TauntPoints;
+					Taunt();
+				}
 			}
 			else
 			{

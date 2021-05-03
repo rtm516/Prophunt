@@ -12,7 +12,10 @@ namespace Prophunt.Utils
 		public static int GameRoundLength = 60 * 5;
 		public static int PostGameRoundLength = 10;
 
+		public static int TauntMinInterval = 10;
 		public static int TauntInterval = 30;
+
+		public static int TauntPoints = 10;
 
 		public static List<string> BannedProps = new()
 		{

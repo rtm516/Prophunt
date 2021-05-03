@@ -31,6 +31,7 @@ namespace Prophunt.UI
 			{
 				Style.Display = DisplayMode.Flex;
 			}
+
 			Style.Dirty();
 		}
 	}

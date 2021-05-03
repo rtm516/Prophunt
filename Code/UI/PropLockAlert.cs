@@ -20,7 +20,7 @@ namespace Prophunt.UI
 		{
 			if ( Player.Local is not ProphuntPlayer player ) return;
 
-			SetClass( "PropLockOn", player.Locked );
+			SetClass( "PropLockOn", player.Locked && player.Team == Team.Prop );
 
 			Style.Dirty();
 		}

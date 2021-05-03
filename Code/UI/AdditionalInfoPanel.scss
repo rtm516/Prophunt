@@ -1,45 +1,45 @@
 AdditionalInfoPanel {
-  width: 100%;
-  justify-content: center;
+    width: 100%;
+    justify-content: center;
 }
 
 .AdditionalInfoPanelDisplay {
-  justify-content: space-between;
-  flex-direction: row;
-  padding: 10px;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 10px;
 
-  width: 500px;
-  height: 80px;
-  margin: 0 auto;
+    width: 500px;
+    height: 80px;
+    margin: 0 auto;
 
-  background-color: #353535;
-  border: 2px solid gray;
-  border-radius: 0 0 30px 30px;
+    background-color: #353535;
+    border: 2px solid gray;
+    border-radius: 0 0 30px 30px;
 
-  justify-content: space-between;
+    justify-content: space-between;
 
-  AdditionalInfoLeftPanel, AdditionalInfoRightPanel {
-    width: 50%;
-    justify-content: center;
-    flex-direction: column;
+    AdditionalInfoLeftPanel, AdditionalInfoRightPanel {
+        width: 50%;
+        justify-content: center;
+        flex-direction: column;
 
-    label {
-      width: 100%;
-      text-align: center;
-      color: white;
-      font-family: OpenSans;
+        label {
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: OpenSans;
+        }
+
+        .Title {
+            font-size: 25px;
+            margin: -2px 0;
+            font-weight: 700;
+        }
+
+        .Value {
+            font-size: 20px;
+            margin: 0;
+            font-weight: 400;
+        }
     }
-
-    .Title {
-      font-size: 25px;
-      margin: -2px 0;
-      font-weight: 700;
-    }
-
-    .Value {
-      font-size: 20px;
-      margin: 0;
-      font-weight: 400;
-    }
-  }
 }

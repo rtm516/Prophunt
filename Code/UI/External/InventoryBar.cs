@@ -34,6 +34,7 @@ namespace Prophunt.UI.External
 			{
 				Style.Display = DisplayMode.Flex;
 			}
+
 			Style.Dirty();
 
 			for ( int i = 0; i < slots.Count; i++ )

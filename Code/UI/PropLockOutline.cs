@@ -15,7 +15,7 @@ namespace Prophunt.UI
 		public override void Tick()
 		{
 			if ( Player.Local is not ProphuntPlayer player ) return;
-			
+
 			if ( player.Team != Team.Prop )
 			{
 				Style.Display = DisplayMode.None;
@@ -25,7 +25,7 @@ namespace Prophunt.UI
 				Style.Display = DisplayMode.Flex;
 			}
 
-			SetClass( "PropLockOn", player.Locked );
+			SetClass( "PropLockOn", player.Locked && player.Team == Team.Prop );
 
 			Style.Dirty();
 		}

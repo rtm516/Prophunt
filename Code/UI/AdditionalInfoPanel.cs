@@ -9,8 +9,8 @@ namespace Prophunt.UI
 			StyleSheet.Load( "/ui/AdditionalInfoPanel.scss" );
 
 			Panel AdditionalInfoPanelDisplay = Add.Panel( "AdditionalInfoPanelDisplay" );
-			AdditionalInfoPanelDisplay.AddChild<AdditionalInfoRightPanel>();
 			AdditionalInfoPanelDisplay.AddChild<AdditionalInfoLeftPanel>();
+			AdditionalInfoPanelDisplay.AddChild<AdditionalInfoRightPanel>();
 		}
 	}
 }
