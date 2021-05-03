@@ -1,4 +1,5 @@
-﻿using Prophunt.Players;
+﻿using System;
+using Prophunt.Players;
 using Sandbox;
 using Sandbox.UI;
 
@@ -6,7 +7,8 @@ namespace Prophunt.UI
 {
 	public class HealthBar : Panel
 	{
-		public Panel HealthBarCount;
+		private Panel HealthBarCount;
+		private float LastHealth;
 
 		public HealthBar()
 		{
@@ -21,7 +23,8 @@ namespace Prophunt.UI
 			SetClass( "PropLockOn", player.Locked );
 			Style.Dirty();
 
-			HealthBarCount.Style.Width = Length.Fraction( player.Health / 100f );
+			LastHealth = LastHealth.LerpTo( player.Health, Time.Delta * 4f );
+			HealthBarCount.Style.Width = Length.Fraction( LastHealth / 100f );
 			HealthBarCount.Style.Dirty();
 		}
 	}

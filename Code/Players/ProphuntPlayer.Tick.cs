@@ -75,7 +75,7 @@ namespace Prophunt.Players
 		{
 			if ( IsServer )
 			{
-				var tr = Trace.Ray( EyePos, EyePos + EyeRot.Forward * 100f )
+				var tr = Trace.Ray( EyePos, EyePos + EyeRot.Forward * 85 )
 					.UseHitboxes()
 					.Ignore( this )
 					.Run();
