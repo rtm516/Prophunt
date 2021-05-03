@@ -28,8 +28,9 @@ namespace Prophunt.UI
 			}
 			else if ( player.Team == Team.Seeker )
 			{
-				Title.SetText( "???" );
-				Value.SetText( "???" );
+				if ( player.ActiveChild is not ProphuntWeapon weapon ) return;
+				Title.SetText( weapon.AmmoClip.ToString() );
+				Value.SetText( weapon.AvailableAmmo().ToString() );
 			}
 		}
 	}

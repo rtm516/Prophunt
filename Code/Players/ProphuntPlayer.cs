@@ -48,6 +48,10 @@ namespace Prophunt.Players
 			}
 
 			Dress();
+			ClearAmmo();
+			
+			GiveAmmo( AmmoType.Buckshot, 20 );
+			GiveAmmo( AmmoType.SMG, 200 );
 
 			base.Respawn();
 		}

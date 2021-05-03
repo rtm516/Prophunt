@@ -7,13 +7,19 @@ using System.Collections.Generic;
 partial class Pistol : ProphuntWeapon
 {
 	public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl";
-	public override float PrimaryRate => 10;
+
+	public override float PrimaryRate => 15.0f;
+	public override float SecondaryRate => 1.0f;
+	public override float ReloadTime => 3.0f;
+
+	public override int Bucket => 1;
 
 	public override void Spawn()
 	{
 		base.Spawn();
 
 		SetModel( "weapons/rust_pistol/rust_pistol.vmdl" );
+		AmmoClip = 12;
 	}
 
 	/// <summary>
@@ -21,95 +27,50 @@ partial class Pistol : ProphuntWeapon
 	/// </summary>
 	public override bool CanPrimaryAttack()
 	{
-		if ( !Owner.Input.Pressed( InputButton.Attack1 ) )
-			return false;
-
-		return base.CanPrimaryAttack();
+		return base.CanPrimaryAttack() && Owner.Input.Pressed( InputButton.Attack1 );
 	}
 
 	public override void AttackPrimary()
 	{
 		TimeSincePrimaryAttack = 0;
 
+		if ( !TakeAmmo( 1 ) )
+		{
+			DryFire();
+			return;
+		}
+
+
 		//
 		// Tell the clients to play the shoot effects
 		//
 		ShootEffects();
-
-
-		bool InWater = Physics.TestPointContents( Owner.EyePos, CollisionLayer.Water );
-		var forward = Owner.EyeRot.Forward * (InWater ? 500 : 4000);
+		PlaySound( "rust_pistol.shoot" );
 
 		//
-		// ShootBullet is coded in a way where we can have bullets pass through shit
-		// or bounce off shit, in which case it'll return multiple results
+		// Shoot the bullets
 		//
-		foreach ( var tr in TraceBullet( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 4000 ) )
-		{
-			tr.Surface.DoBulletImpact( tr );
-
-			if ( !IsServer ) continue;
-			if ( !tr.Entity.IsValid() ) continue;
-
-			if ( tr.Entity is ProphuntPlayer player && player.Team == (Owner as ProphuntPlayer).Team ) continue;
-
-			//
-			// We turn predictiuon off for this, so aany exploding effects
-			//
-			using ( Prediction.Off() )
-			{
-				var damage = DamageInfo.FromBullet( tr.EndPos, forward.Normal * 100, 15 )
-					.UsingTraceResult( tr )
-					.WithAttacker( Owner )
-					.WithWeapon( this );
-
-				tr.Entity.TakeDamage( damage );
-
-				if ( tr.Entity is Prop && tr.Body.BodyType == PhysicsBodyType.Dynamic )
-				{
-					var damageSelf = DamageInfo.Generic( 5 )
-							.WithAttacker( Owner )
-							.WithWeapon( this );
-
-					Owner.TakeDamage( damageSelf );
-				}
-			}
-		}
-
+		ShootBullet( 0.05f, 1.5f, 9.0f, 3.0f );
 	}
 
-	public override IEnumerable<TraceResult> TraceBullet( Vector3 start, Vector3 end, float radius = 2 )
+	public override bool CanSecondaryAttack()
 	{
-		bool InWater = Physics.TestPointContents( start, CollisionLayer.Water );
-
-		var tr = Trace.Ray( start, end )
-				//.UseHitboxes()
-				.HitLayer( CollisionLayer.Water, !InWater )
-				.Ignore( Owner )
-				.Ignore( this )
-				.Size( radius )
-				.Run();
-
-		yield return tr;
+		return base.CanPrimaryAttack() && Owner.Input.Pressed( InputButton.Attack2 );
 	}
 
-	[ClientRpc]
-	public virtual void ShootEffects()
+	public override void AttackSecondary()
 	{
-		Host.AssertClient();
+		TimeSinceSecondaryAttack = 0;
 
-		var muzzle = EffectEntity.GetAttachment( "muzzle" );
-		bool InWater = Physics.TestPointContents( muzzle.Pos, CollisionLayer.Water );
+		if ( Host.IsClient ) return;
 
-		Sound.FromEntity( "rust_pistol.shoot", this );
-		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
-
-		ViewModelEntity?.SetAnimParam( "fire", true );
-		CrosshairPanel?.OnEvent( "onattack" );
-
-		if ( Owner == Player.Local )
+		var ent = new Prop
 		{
-			new Sandbox.ScreenShake.Perlin( 0.5f, 2.0f, 0.5f );
-		}
+			WorldPos = Owner.EyePos + Owner.EyeRot.Forward * 50,
+			WorldRot = Owner.EyeRot
+		};
+
+		ent.SetModel( "models/citizen_props/sodacan01.vmdl" );
+		ent.Velocity = Owner.EyeRot.Forward * 1000;
 	}
 }
