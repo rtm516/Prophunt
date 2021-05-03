@@ -1,22 +1,22 @@
-﻿using Sandbox;
-using Sandbox.UI;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Prophunt.Players;
-using Prophunt.Utils;
+using Sandbox;
+using Sandbox.UI;
+using Sandbox.UI.Construct;
 
-namespace Prophunt.UI.External
+namespace Prophunt.UI
 {
-	public class InventoryBar : Panel, IClientInput
+	public class InventoryList : Panel, IClientInput
 	{
-		readonly List<InventoryIcon> slots = new();
+		private List<Label> Items = new();
 
-		public InventoryBar()
+		public InventoryList()
 		{
-			for ( int i = 0; i < 9; i++ )
-			{
-				var icon = new InventoryIcon( i + 1, this );
-				slots.Add( icon );
-			}
+			StyleSheet.Load( "/ui/InventoryList.scss" );
+
+			//Items.Add( Add.Label( "Pistol", "weapon" ) );
+			//Items.Add( Add.Label( "SMG", "weapon" ) );
+			//Items.Add( Add.Label( "Shotgun", "weapon" ) );
 		}
 
 		public override void Tick()
@@ -24,36 +24,28 @@ namespace Prophunt.UI.External
 			base.Tick();
 
 			if ( Player.Local is not ProphuntPlayer player ) return;
-			if ( player.Inventory == null ) return;
 
-			if ( player.Team != Team.Seeker )
+			int i;
+			for ( i = 0; i < player.Inventory.Count(); i++ )
 			{
-				Style.Display = DisplayMode.None;
-			}
-			else
-			{
-				Style.Display = DisplayMode.Flex;
-			}
+				ProphuntWeapon weapon = player.Inventory.GetSlot( i ) as ProphuntWeapon;
+				if ( i > Items.Count - 1 || Items[i] is not Label )
+				{
+					Items.Add( Add.Label( weapon.ToString(), "weapon" ) );
+				}
+				else
+				{
+					Items[i].SetText( weapon.ToString() );
+				}
 
-			Style.Dirty();
-
-			for ( int i = 0; i < slots.Count; i++ )
-			{
-				UpdateIcon( player.Inventory.GetSlot( i ), slots[i], i );
-			}
-		}
-
-		private static void UpdateIcon( Entity ent, InventoryIcon inventoryIcon, int i )
-		{
-			if ( ent == null )
-			{
-				inventoryIcon.Clear();
-				return;
+				Items[i].SetClass( "selected", weapon.IsActiveChild() );
+				Items[i].AddClass( "weapon" );
 			}
 
-			inventoryIcon.TargetEnt = ent;
-			inventoryIcon.Label.Text = ent.ToString();
-			inventoryIcon.SetClass( "active", ent.IsActiveChild() );
+			for ( int j = i; j < Items.Count; j++ )
+			{
+				Items[j].Delete();
+			}
 		}
 
 		public void ProcessClientInput( ClientInput input )

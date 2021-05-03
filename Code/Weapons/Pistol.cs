@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-[Library( "weapon_pistol" )]
+[Library( "weapon_pistol", Title = "Pistol" )]
 partial class Pistol : ProphuntWeapon
 {
 	public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl";

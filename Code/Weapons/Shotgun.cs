@@ -2,7 +2,7 @@
 using Prophunt.Utils;
 using Sandbox;
 
-[Library( "weapon_shotgun" )]
+[Library( "weapon_shotgun", Title = "Shotgun" )]
 partial class Shotgun : ProphuntWeapon
 { 
 	public override string ViewModelPath => "weapons/rust_pumpshotgun/v_rust_pumpshotgun.vmdl";
