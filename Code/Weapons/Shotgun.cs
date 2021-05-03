@@ -4,7 +4,7 @@ using Sandbox;
 
 [Library( "weapon_shotgun", Title = "Shotgun" )]
 partial class Shotgun : ProphuntWeapon
-{ 
+{
 	public override string ViewModelPath => "weapons/rust_pumpshotgun/v_rust_pumpshotgun.vmdl";
 	public override float PrimaryRate => 1;
 	public override float SecondaryRate => 1;
@@ -17,19 +17,27 @@ partial class Shotgun : ProphuntWeapon
 	{
 		base.Spawn();
 
-		SetModel( "weapons/rust_pumpshotgun/rust_pumpshotgun.vmdl" );  
+		SetModel( "weapons/rust_pumpshotgun/rust_pumpshotgun.vmdl" );
 
 		AmmoClip = 6;
 	}
 
-	public override void AttackPrimary() 
+	public override void AttackPrimary()
 	{
 		TimeSincePrimaryAttack = 0;
 		TimeSinceSecondaryAttack = 0;
 
 		if ( !TakeAmmo( 1 ) )
 		{
-			DryFire();
+			if ( AmmoClip >= ClipSize )
+			{
+				DryFire();
+			}
+			else
+			{
+				Reload();
+			}
+
 			return;
 		}
 
@@ -57,7 +65,15 @@ partial class Shotgun : ProphuntWeapon
 
 		if ( !TakeAmmo( 2 ) )
 		{
-			DryFire();
+			if ( AmmoClip >= ClipSize )
+			{
+				DryFire();
+			}
+			else
+			{
+				Reload();
+			}
+
 			return;
 		}
 
@@ -88,9 +104,9 @@ partial class Shotgun : ProphuntWeapon
 
 		ViewModelEntity?.SetAnimParam( "fire", true );
 
-		if (Owner == Player.Local)
+		if ( Owner == Player.Local )
 		{
-			new Sandbox.ScreenShake.Perlin(1.0f, 1.5f, 2.0f);
+			new Sandbox.ScreenShake.Perlin( 1.0f, 1.5f, 2.0f );
 		}
 
 		CrosshairPanel?.OnEvent( "fire" );
@@ -106,9 +122,9 @@ partial class Shotgun : ProphuntWeapon
 		ViewModelEntity?.SetAnimParam( "fire_double", true );
 		CrosshairPanel?.OnEvent( "fire" );
 
-		if (Owner == Player.Local)
+		if ( Owner == Player.Local )
 		{
-			new Sandbox.ScreenShake.Perlin(3.0f, 3.0f, 3.0f);
+			new Sandbox.ScreenShake.Perlin( 3.0f, 3.0f, 3.0f );
 		}
 	}
 

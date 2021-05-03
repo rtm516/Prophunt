@@ -11,7 +11,6 @@ internal partial class ProphuntWeapon : BaseWeapon
 	public virtual AmmoType AmmoType => AmmoType.Pistol;
 	public virtual int ClipSize => 16;
 	public virtual float ReloadTime => 3.0f;
-	public virtual int Bucket => 1;
 	public virtual int BucketWeight => 100;
 
 	[NetPredicted]
@@ -25,9 +24,6 @@ internal partial class ProphuntWeapon : BaseWeapon
 
 	[NetPredicted]
 	public TimeSince TimeSinceDeployed { get; set; }
-
-
-	public PickupTrigger PickupTrigger { get; protected set; }
 
 
 	public int AvailableAmmo()
@@ -61,10 +57,6 @@ internal partial class ProphuntWeapon : BaseWeapon
 		base.Spawn();
 
 		SetModel( "weapons/rust_pistol/rust_pistol.vmdl" );
-
-		PickupTrigger = new PickupTrigger();
-		PickupTrigger.Parent = this;
-		PickupTrigger.WorldPos = WorldPos;
 	}
 
 	public override void Reload()
@@ -132,7 +124,7 @@ internal partial class ProphuntWeapon : BaseWeapon
 	{
 		TimeSincePrimaryAttack = 0;
 		TimeSinceSecondaryAttack = 0;
-		
+
 		DryFire();
 	}
 
@@ -208,7 +200,7 @@ internal partial class ProphuntWeapon : BaseWeapon
 	[ClientRpc]
 	public virtual void DryFire()
 	{
-		// CLICK
+		ViewModelEntity?.SetAnimParam( "dryfire", true );
 	}
 
 	public bool IsUsable()

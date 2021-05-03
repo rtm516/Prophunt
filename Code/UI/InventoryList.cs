@@ -14,7 +14,6 @@ namespace Prophunt.UI
 		public InventoryList()
 		{
 			StyleSheet.Load( "/ui/InventoryList.scss" );
-			Items.Clear();
 		}
 
 		public override void Tick()
@@ -23,12 +22,12 @@ namespace Prophunt.UI
 
 			if ( Player.Local is not ProphuntPlayer player ) return;
 
-			IOrderedEnumerable<ProphuntWeapon> Weapons = player.Children.Select( x => x as ProphuntWeapon ).Where( x => x.IsValid() && x.IsUsable() ).OrderBy( x => x.BucketWeight );
+			IOrderedEnumerable<ProphuntWeapon> Weapons = player.Children.Select( x => x as ProphuntWeapon ).Where( x => x.IsValid() ).OrderBy( x => x.BucketWeight );
 
 			int i = 0;
 
 			// Reload work around
-			if ( Items[i].Parent != this )
+			if ( Items.Count >= 1 && Items[i].Parent != this )
 			{
 				Items.Clear();
 			}

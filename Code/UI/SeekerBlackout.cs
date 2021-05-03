@@ -17,16 +17,7 @@ namespace Prophunt.UI
 		{
 			if ( Player.Local is not ProphuntPlayer player ) return;
 
-			if ( player.Team == Team.Seeker && Game.Instance.Round is WarnupRound )
-			{
-				Style.Display = DisplayMode.Flex;
-			}
-			else
-			{
-				Style.Display = DisplayMode.None;
-			}
-
-			Style.Dirty();
+			SetClass( "active", player.Team == Team.Seeker && Game.Instance.Round is WarnupRound );
 		}
 	}
 }

@@ -33,7 +33,15 @@ partial class Pistol : ProphuntWeapon
 
 		if ( !TakeAmmo( 1 ) )
 		{
-			DryFire();
+			if ( AmmoClip >= ClipSize )
+			{
+				DryFire();
+			}
+			else
+			{
+				Reload();
+			}
+
 			return;
 		}
 
