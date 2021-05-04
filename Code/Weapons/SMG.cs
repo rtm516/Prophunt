@@ -62,13 +62,13 @@ partial class SMG : ProphuntWeapon
 
 		if ( Host.IsClient ) return;
 
-		var ent = new Grenade
+		new Grenade
 		{
 			WorldPos = Owner.EyePos + Owner.EyeRot.Forward * 50,
-			WorldRot = Owner.EyeRot
+			WorldRot = Owner.EyeRot,
+			Velocity = Owner.EyeRot.Forward * 1000,
+			Owner = Owner
 		};
-
-		ent.Velocity = Owner.EyeRot.Forward * 1000;
 	}
 
 	[ClientRpc]

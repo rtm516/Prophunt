@@ -26,5 +26,19 @@ namespace Prophunt.Entities
 
 			return false;
 		}
+
+		public override void TakeDamage( DamageInfo info )
+		{
+			if ( PhysicsBody.BodyType == PhysicsBodyType.Dynamic && info.Attacker is ProphuntPlayer )
+			{
+				var damageSelf = DamageInfo.Generic( info.Damage * 0.75f )
+					.WithAttacker( info.Attacker )
+					.WithWeapon( info.Weapon );
+
+				info.Attacker.TakeDamage( damageSelf );
+			}
+
+			base.TakeDamage( info );
+		}
 	}
 }
