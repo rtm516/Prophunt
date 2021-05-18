@@ -30,8 +30,6 @@ namespace Prophunt
 			ChangeRound( new PreGameRound() );
 		}
 
-		public override Player CreatePlayer() => new ProphuntPlayer();
-
 		public void ChangeRound( BaseRound round )
 		{
 			Assert.NotNull( round );
@@ -56,7 +54,7 @@ namespace Prophunt
 		public static void SystemMessage( string message )
 		{
 			Host.AssertServer();
-			ChatBox.AddChatEntry( Player.All, "Server", message, "/materials/prophunt/ui/system.png" );
+			ChatBox.AddChatEntry( To.Everyone, "Server", message, "/materials/prophunt/ui/system.png" );
 		}
 	}
 }

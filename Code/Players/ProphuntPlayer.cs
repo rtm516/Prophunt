@@ -3,7 +3,7 @@ using Sandbox;
 
 namespace Prophunt.Players
 {
-	internal partial class ProphuntPlayer : BasePlayer
+	internal partial class ProphuntPlayer : Player
 	{
 		[Net]
 		public Team Team { get; set; }

@@ -34,6 +34,7 @@ namespace Prophunt.Rounds
 			}
 
 			// Spawn map props
+			List<Prop> props = new List<Prop>();
 			foreach ( MapProp mapProp in Game.Instance.MapProps )
 			{
 				Prop prop = Library.Create<Entity>( mapProp.ClassName ) as Prop;
@@ -42,29 +43,41 @@ namespace Prophunt.Rounds
 				prop.WorldRot = mapProp.Rotation;
 				prop.WorldScale = mapProp.Scale;
 				prop.RenderColor = mapProp.Color;
+
+				// Freeze the prop until we are done placing
+				prop.MoveType = MoveType.None;
+				prop.PhysicsEnabled = false;
+
+				props.Add( prop );
+			}
+
+			// Fixes physics issues on initial spawn
+			foreach ( Prop prop in props )
+			{
+				prop.Spawn();
 			}
 		}
 
-		public override void PlayerJoined( Player player )
+		public override void ClientJoined( Client client )
 		{
-			base.PlayerJoined( player );
+			base.ClientJoined( client );
 			CheckReady();
 		}
 
-		public override void PlayerDisconnected( Player player, NetworkDisconnectionReason reason )
+		public override void ClientDisconnected( Client client, NetworkDisconnectionReason reason )
 		{
-			base.PlayerDisconnected( player, reason );
-			CheckReady( player );
+			base.ClientDisconnected( client, reason );
+			CheckReady( client );
 		}
 
-		private void CheckReady( Player ignored = null )
+		private void CheckReady( Client ignored = null )
 		{
 			if ( Host.IsClient ) return;
 
-			int playerCount = Player.All.Count;
+			int playerCount = Client.All.Count;
 			if ( playerCount >= Config.MinPlayers )
 			{
-				List<Player> allPlayers = Player.All.Where( player => player != ignored ).ToList();
+				List<Player> allPlayers = Client.All.Where( client => client != ignored ).Select( client => client.Pawn as Player ).ToList();
 
 				List<Player> seekers = allPlayers.OrderBy( x => Rand.Float() ).Take( (int)Math.Ceiling( playerCount * Config.SeekerPct ) ).ToList();
 

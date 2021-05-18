@@ -22,10 +22,10 @@ namespace Prophunt.Rounds
 
 		public virtual void Tick() { }
 
-		public virtual void PlayerKilled( Player player ) { }
+		public virtual void ClientKilled( Client client ) { }
 
-		public virtual void PlayerJoined( Player player ) { }
+		public virtual void ClientJoined( Client client ) { }
 
-		public virtual void PlayerDisconnected( Player player, NetworkDisconnectionReason reason ) { }
+		public virtual void ClientDisconnected( Client client, NetworkDisconnectionReason reason ) { }
 	}
 }

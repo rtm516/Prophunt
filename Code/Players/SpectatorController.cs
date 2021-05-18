@@ -19,9 +19,9 @@ namespace Prophunt.Players
 			TargetLocked = true;
 		}
 
-		public override void Tick()
+		public override void Simulate()
 		{
-			base.Tick();
+			base.Simulate();
 
 			bool posUpdated = false;
 			if ( Input.Pressed( InputButton.Attack1 ) )
@@ -37,7 +37,7 @@ namespace Prophunt.Players
 
 			if ( posUpdated )
 			{
-				List<Player> alivePlayers = Player.All.Where( player => (player as ProphuntPlayer).Team != Team.Spectator ).ToList();
+				List<Player> alivePlayers = Client.All.Select( client => client.Pawn as Player ).Where( player => (player as ProphuntPlayer).Team != Team.Spectator ).ToList();
 
 				if ( alivePlayers.Count == 0 ) return;
 
@@ -45,7 +45,7 @@ namespace Prophunt.Players
 				PlayerIndex = Math.Abs(PlayerIndex) % alivePlayers.Count;
 
 				// Don't allow them to select themselves
-				if ( alivePlayers[PlayerIndex] == Player )
+				if ( alivePlayers[PlayerIndex] == Pawn )
 				{
 					PlayerIndex++;
 					PlayerIndex = Math.Abs( PlayerIndex ) % alivePlayers.Count;
@@ -54,7 +54,7 @@ namespace Prophunt.Players
 				TargetPlayer = alivePlayers[PlayerIndex] as ProphuntPlayer;
 
 				// Move to the new player position
-				Pos = alivePlayers[PlayerIndex].WorldPos;
+				Position = alivePlayers[PlayerIndex].WorldPos;
 			}
 		}
 	}

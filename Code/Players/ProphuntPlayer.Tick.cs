@@ -9,9 +9,9 @@ namespace Prophunt.Players
 		private Prop Target { get; set; }
 		private Prop _Target;
 
-		protected override void Tick()
+		public override void Simulate( Client cl )
 		{
-			base.Tick();
+			base.Simulate( cl );
 
 			// Update active weapon
 			if ( Input.ActiveChild != null )
@@ -19,7 +19,9 @@ namespace Prophunt.Players
 				ActiveChild = Input.ActiveChild;
 			}
 
-			if ( IsLocalPlayer && Target != _Target )
+			SimulateActiveChild( cl, ActiveChild );
+
+			if ( IsLocalPawn && Target != _Target )
 			{
 				if ( _Target.IsValid() )
 				{
@@ -36,28 +38,28 @@ namespace Prophunt.Players
 
 			if ( Team == Team.Spectator )
 			{
-				TickSpectator();
+				SimulateSpectator();
 			}
 			else
 			{
-				TickPlayer();
+				SimulatePlayer();
 			}
 
 			if ( Team == Team.Prop )
 			{
-				TickProp();
+				SimulateProp();
 			}
 			else if ( Team == Team.Seeker )
 			{
-				TickSeeker();
+				SimulateSeeker();
 			}
 		}
 
-		private void TickSpectator()
+		private void SimulateSpectator()
 		{
 		}
 
-		private void TickPlayer()
+		private void SimulatePlayer()
 		{
 			if ( Input.Pressed( InputButton.View ) )
 			{
@@ -77,7 +79,7 @@ namespace Prophunt.Players
 			}
 		}
 
-		private void TickProp()
+		private void SimulateProp()
 		{
 			if ( IsServer )
 			{
@@ -107,7 +109,7 @@ namespace Prophunt.Players
 			}
 		}
 
-		private void TickSeeker()
+		private void SimulateSeeker()
 		{
 		}
 	}

@@ -21,7 +21,7 @@ namespace Prophunt.UI
 		{
 			base.Tick();
 
-			if ( Player.Local is not ProphuntPlayer player ) return;
+			if ( Local.Pawn is not ProphuntPlayer player ) return;
 
 			if ( player.Team == Team.Spectator )
 			{

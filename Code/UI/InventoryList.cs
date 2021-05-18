@@ -7,7 +7,7 @@ using Sandbox.UI.Construct;
 
 namespace Prophunt.UI
 {
-	public class InventoryList : Panel, IClientInput
+	public class InventoryList : Panel
 	{
 		private List<Label> Items = new();
 
@@ -20,7 +20,7 @@ namespace Prophunt.UI
 		{
 			base.Tick();
 
-			if ( Player.Local is not ProphuntPlayer player ) return;
+			if ( Local.Pawn is not ProphuntPlayer player ) return;
 
 			IOrderedEnumerable<ProphuntWeapon> Weapons = player.Children.Select( x => x as ProphuntWeapon ).Where( x => x.IsValid() ).OrderBy( x => x.BucketWeight );
 
@@ -54,13 +54,14 @@ namespace Prophunt.UI
 			}
 		}
 
-		public void ProcessClientInput( ClientInput input )
+		[Event( "buildinput" )]
+		public void ProcessClientInput( InputBuilder input )
 		{
-			var player = Player.Local;
+			var player = Local.Pawn as Player;
 			if ( player == null )
 				return;
 
-			var inventory = Player.Local.Inventory;
+			var inventory = player.Inventory;
 			if ( inventory == null )
 				return;
 
@@ -74,9 +75,9 @@ namespace Prophunt.UI
 			if ( input.MouseWheel != 0 ) SwitchActiveSlot( input, inventory, input.MouseWheel );
 		}
 
-		private static void SetActiveSlot( ClientInput input, IBaseInventory inventory, int i )
+		private static void SetActiveSlot( InputBuilder input, IBaseInventory inventory, int i )
 		{
-			var player = Player.Local;
+			var player = Local.Pawn as Player;
 			if ( player == null )
 				return;
 
@@ -90,7 +91,7 @@ namespace Prophunt.UI
 			input.ActiveChild = ent;
 		}
 
-		private static void SwitchActiveSlot( ClientInput input, IBaseInventory inventory, int idelta )
+		private static void SwitchActiveSlot( InputBuilder input, IBaseInventory inventory, int idelta )
 		{
 			var count = inventory.Count();
 			if ( count == 0 ) return;

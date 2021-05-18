@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Prophunt.Players;
 using Prophunt.Utils;
 using Sandbox;
 using Prop = Prophunt.Entities.Prop;
@@ -9,22 +10,28 @@ namespace Prophunt
 	{
 		public List<MapProp> MapProps = new List<MapProp>();
 
-		public override void PlayerKilled( Player player )
+		public override void OnKilled( Client client, Entity pawn )
 		{
-			base.PlayerKilled( player );
-			Round?.PlayerKilled( player );
+			base.OnKilled( client, pawn );
+			Round?.ClientKilled( client );
 		}
 
-		public override void PlayerJoined( Player player )
+		public override void ClientJoined( Client client )
 		{
-			base.PlayerJoined( player );
-			Round?.PlayerJoined( player );
+			base.ClientJoined( client );
+
+			var player = new ProphuntPlayer();
+			player.Respawn();
+
+			client.Pawn = player;
+
+			Round?.ClientJoined( client );
 		}
 
-		public override void PlayerDisconnected( Player player, NetworkDisconnectionReason reason )
+		public override void ClientDisconnect( Client client, NetworkDisconnectionReason reason )
 		{
-			base.PlayerDisconnected( player, reason );
-			Round?.PlayerDisconnected( player, reason );
+			base.ClientDisconnect( client, reason );
+			Round?.ClientDisconnected( client, reason );
 		}
 
 		public override void PostLevelLoaded()
@@ -33,9 +40,9 @@ namespace Prophunt
 
 			if ( Host.IsClient ) return;
 
-			foreach (Entity entity in Entity.All)
+			foreach ( Entity entity in Entity.All )
 			{
-				if ( entity is Prop prop && entity.ClassInfo != null && (entity.ClassInfo.Name == "prop_physics" || entity.ClassInfo.Name == "ph_prop_physics" ))
+				if ( entity is Prop prop && entity.ClassInfo != null && (entity.ClassInfo.Name == "prop_physics" || entity.ClassInfo.Name == "ph_prop_physics") )
 				{
 					MapProp mapProp = new MapProp();
 

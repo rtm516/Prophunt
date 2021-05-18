@@ -15,7 +15,7 @@ namespace Prophunt.UI
 
 		public override void Tick()
 		{
-			if ( Player.Local is not ProphuntPlayer player ) return;
+			if ( Local.Pawn is not ProphuntPlayer player ) return;
 
 			SetClass( "active", player.Team == Team.Seeker && Game.Instance.Round is WarnupRound );
 		}

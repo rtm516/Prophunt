@@ -31,28 +31,28 @@ namespace Prophunt.Rounds
 			}
 		}
 
-		public override void PlayerKilled( Player player )
+		public override void ClientKilled( Client client )
 		{
-			base.PlayerKilled( player );
+			base.ClientKilled( client );
 			CheckPlayers();
 		}
 
-		public override void PlayerDisconnected( Player player, NetworkDisconnectionReason reason )
+		public override void ClientDisconnected( Client client, NetworkDisconnectionReason reason )
 		{
-			base.PlayerDisconnected( player, reason );
-			CheckPlayers( player );
+			base.ClientDisconnected( client, reason );
+			CheckPlayers( client );
 		}
 
-		private void CheckPlayers( Player ignored = null )
+		private void CheckPlayers( Client ignored = null )
 		{
 			if ( Host.IsClient ) return;
 
 			Dictionary<Team, int> playerTeams = new();
 			int aliveCount = 0;
-			foreach ( Player player in Player.All )
+			foreach ( Client client in Client.All )
 			{
-				if ( player == ignored ) continue;
-				ProphuntPlayer prophuntPlayer = player as ProphuntPlayer;
+				if ( client == ignored ) continue;
+				ProphuntPlayer prophuntPlayer = client.Pawn as ProphuntPlayer;
 				if ( prophuntPlayer.Team != Team.Spectator )
 				{
 					aliveCount++;

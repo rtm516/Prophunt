@@ -29,7 +29,7 @@ namespace Prophunt.Entities
 
 		public override void TakeDamage( DamageInfo info )
 		{
-			if ( PhysicsBody.BodyType == PhysicsBodyType.Dynamic && info.Attacker is ProphuntPlayer )
+			if ( PhysicsBody != null && PhysicsBody.BodyType == PhysicsBodyType.Dynamic && info.Attacker is ProphuntPlayer )
 			{
 				var damageSelf = DamageInfo.Generic( info.Damage * 0.75f )
 					.WithAttacker( info.Attacker )

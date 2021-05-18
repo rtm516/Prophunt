@@ -37,9 +37,10 @@ namespace Prophunt.Rounds
 			base.Finish();
 			if ( Host.IsServer )
 			{
-				foreach ( Player player in Player.All )
+				foreach ( Client client in Client.All )
 				{
-					(player as ProphuntPlayer).Team = Team.Spectator;
+					var player = client.Pawn as ProphuntPlayer;
+					player.Team = Team.Spectator;
 					player.Respawn();
 				}
 			}

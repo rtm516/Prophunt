@@ -78,18 +78,18 @@ internal partial class ProphuntWeapon : BaseWeapon
 		}
 
 		IsReloading = true;
-		Owner.SetAnimParam( "b_reload", true );
+		(Owner as AnimEntity).SetAnimParam( "b_reload", true );
 		StartReloadEffects();
 	}
 
-	public override void OnPlayerControlTick( Player owner )
+	public override void Simulate( Client owner )
 	{
 		if ( TimeSinceDeployed < 0.6f )
 			return;
 
 		if ( !IsReloading )
 		{
-			base.OnPlayerControlTick( owner );
+			base.Simulate( owner );
 		}
 
 		if ( IsReloading && TimeSinceReload > ReloadTime )
@@ -135,7 +135,7 @@ internal partial class ProphuntWeapon : BaseWeapon
 
 		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
 
-		if ( Owner == Player.Local )
+		if ( IsLocalPawn )
 		{
 			new Sandbox.ScreenShake.Perlin();
 		}

@@ -8,12 +8,12 @@ namespace Prophunt.Players
 
 		public override void DoRotation( Rotation idealRotation )
 		{
-			if ( !(Player as ProphuntPlayer).Locked )
+			if ( !(Pawn as ProphuntPlayer).Locked )
 			{
 				LastRotation = idealRotation;
 			}
 
-			Rot = LastRotation;
+			Rotation = LastRotation;
 		}
 	}
 }

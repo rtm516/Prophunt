@@ -4,6 +4,7 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
+using System.Linq;
 
 namespace Prophunt.UI
 {
@@ -24,11 +25,12 @@ namespace Prophunt.UI
 
 		public override void Tick()
 		{
-			if ( Player.Local is not ProphuntPlayer player ) return;
+			if ( Local.Pawn is not ProphuntPlayer player ) return;
 
 			int seekerCount = 0;
 			int propsCount = 0;
-			foreach ( Player loopPlayer in Player.All )
+			var players = Client.All.Select( client => client.Pawn as Player );
+			foreach ( Player loopPlayer in players )
 			{
 				if ( loopPlayer is ProphuntPlayer prophuntPlayer )
 				{

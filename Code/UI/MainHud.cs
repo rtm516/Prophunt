@@ -4,7 +4,7 @@ using Sandbox.UI;
 namespace Prophunt.UI
 {
 	[Library]
-	public partial class MainHud : Hud
+	public partial class MainHud : HudEntity<RootPanel>
 	{
 		public MainHud()
 		{

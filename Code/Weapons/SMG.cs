@@ -41,7 +41,7 @@ partial class SMG : ProphuntWeapon
 			return;
 		}
 
-		Owner.SetAnimParam( "b_attack", true );
+		(Owner as AnimEntity).SetAnimParam( "b_attack", true );
 
 		//
 		// Tell the clients to play the shoot effects
@@ -79,7 +79,7 @@ partial class SMG : ProphuntWeapon
 		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
 		Particles.Create( "particles/pistol_ejectbrass.vpcf", EffectEntity, "ejection_point" );
 
-		if ( Owner == Player.Local )
+		if ( IsLocalPawn )
 		{
 			new Sandbox.ScreenShake.Perlin(0.5f, 4.0f, 1.0f, 0.5f);
 		}
@@ -88,10 +88,9 @@ partial class SMG : ProphuntWeapon
 		CrosshairPanel?.OnEvent( "fire" );
 	}
 
-	public override void TickPlayerAnimator( PlayerAnimator anim )
+	public override void SimulateAnimator( PawnAnimator anim )
 	{
 		anim.SetParam( "holdtype", 2 ); // TODO this is shit
 		anim.SetParam( "aimat_weight", 1.0f );
 	}
-
 }

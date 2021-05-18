@@ -14,11 +14,11 @@ namespace Prophunt.Players
 			// Dont do anything
 		}
 
-		public override void Tick()
+		public override void Simulate()
 		{
-			EyeHeight = Player.CollisionBounds.Maxs.z * 0.8f;
+			EyeHeight = (Pawn as AnimEntity).CollisionBounds.Maxs.z * 0.8f;
 
-			base.Tick();
+			base.Simulate();
 		}
 	}
 }
