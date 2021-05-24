@@ -13,16 +13,16 @@ internal partial class ProphuntWeapon : BaseWeapon
 	public virtual float ReloadTime => 3.0f;
 	public virtual int BucketWeight => 100;
 
-	[NetPredicted]
+	[Net, Predicted]
 	public int AmmoClip { get; set; }
 
-	[NetPredicted]
+	[Net, Predicted]
 	public TimeSince TimeSinceReload { get; set; }
 
-	[NetPredicted]
+	[Net, Predicted]
 	public bool IsReloading { get; set; }
 
-	[NetPredicted]
+	[Net, Predicted]
 	public TimeSince TimeSinceDeployed { get; set; }
 
 
