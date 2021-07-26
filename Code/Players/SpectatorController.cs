@@ -54,7 +54,7 @@ namespace Prophunt.Players
 				TargetPlayer = alivePlayers[PlayerIndex] as ProphuntPlayer;
 
 				// Move to the new player position
-				Position = alivePlayers[PlayerIndex].WorldPos;
+				Position = alivePlayers[PlayerIndex].Position;
 			}
 		}
 	}

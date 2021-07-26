@@ -78,7 +78,7 @@ internal partial class ProphuntWeapon : BaseWeapon
 		}
 
 		IsReloading = true;
-		(Owner as AnimEntity).SetAnimParam( "b_reload", true );
+		(Owner as AnimEntity).SetAnimBool( "b_reload", true );
 		StartReloadEffects();
 	}
 
@@ -115,7 +115,7 @@ internal partial class ProphuntWeapon : BaseWeapon
 	[ClientRpc]
 	public virtual void StartReloadEffects()
 	{
-		ViewModelEntity?.SetAnimParam( "reload", true );
+		ViewModelEntity?.SetAnimBool( "reload", true );
 
 		// TODO - player third person model reload
 	}
@@ -140,8 +140,8 @@ internal partial class ProphuntWeapon : BaseWeapon
 			new Sandbox.ScreenShake.Perlin();
 		}
 
-		ViewModelEntity?.SetAnimParam( "fire", true );
-		CrosshairPanel?.OnEvent( "fire" );
+		ViewModelEntity?.SetAnimBool( "fire", true );
+		//CrosshairPanel?.OnEvent( "fire" );
 	}
 
 	/// <summary>
@@ -191,7 +191,7 @@ internal partial class ProphuntWeapon : BaseWeapon
 	[ClientRpc]
 	public virtual void DryFire()
 	{
-		ViewModelEntity?.SetAnimParam( "dryfire", true );
+		ViewModelEntity?.SetAnimBool( "dryfire", true );
 	}
 
 	public bool IsUsable()

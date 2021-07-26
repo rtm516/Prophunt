@@ -2,7 +2,7 @@
 
 namespace Prophunt.Rounds
 {
-	public abstract class BaseRound : NetworkClass
+	public abstract class BaseRound : NetworkComponent
 	{
 		public TimeSince TimeSinceRoundStart;
 		public int RoundLength;

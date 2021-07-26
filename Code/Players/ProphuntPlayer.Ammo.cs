@@ -1,6 +1,7 @@
 ﻿using System;
 using Prophunt.Utils;
 using Sandbox;
+using System.Collections.Generic;
 
 namespace Prophunt.Players
 {
@@ -8,44 +9,56 @@ namespace Prophunt.Players
 	internal partial class ProphuntPlayer
 	{
 		[Net]
-		public NetList<int> Ammo { get; set; } = new();
+		public List<int> Ammo { get; set; } = new(); // todo - networkable dictionaries
 
 		public void ClearAmmo()
 		{
 			Ammo.Clear();
 		}
 
-		public int AmmoCount( AmmoType type )
+		public int AmmoCount(AmmoType type)
 		{
-			if ( type == AmmoType.Pistol ) return 999;
+			var iType = (int)type;
+			if (Ammo == null) return 0;
+			if (Ammo.Count <= iType) return 0;
 
-			if ( Ammo == null ) return 0;
-
-			return Ammo.Get( type );
+			return Ammo[(int)type];
 		}
 
-		public bool GiveAmmo( AmmoType type, int amount )
+		public bool SetAmmo(AmmoType type, int amount)
 		{
-			if ( !Host.IsServer ) return false;
-			if ( type == AmmoType.Pistol ) return false;
-			if ( Ammo == null ) return false;
+			var iType = (int)type;
+			if (!Host.IsServer) return false;
+			if (Ammo == null) return false;
 
-			var currentAmmo = AmmoCount( type );
-			return Ammo.Set( type, currentAmmo + amount );
+			while (Ammo.Count <= iType)
+			{
+				Ammo.Add(0);
+			}
+
+			Ammo[(int)type] = amount;
+			return true;
 		}
 
-		public int TakeAmmo( AmmoType type, int amount )
+		public bool GiveAmmo(AmmoType type, int amount)
 		{
-			//if ( Ammo == null ) return 0;
+			if (!Host.IsServer) return false;
+			if (Ammo == null) return false;
 
-			var available = Ammo.Get( type );
-			if ( type == AmmoType.Pistol ) available = 999;
-			amount = Math.Min( Ammo.Get( type ), amount );
+			SetAmmo(type, AmmoCount(type) + amount);
+			return true;
+		}
 
-			Ammo.Set( type, available - amount );
-			NetworkDirty( "Ammo", NetVarGroup.Net );
+		public int TakeAmmo(AmmoType type, int amount)
+		{
+			if (Ammo == null) return 0;
 
+			var available = AmmoCount(type);
+			amount = Math.Min(available, amount);
+
+			SetAmmo(type, available - amount);
 			return amount;
 		}
 	}
 }
+

@@ -1,18 +1,4 @@
 {
-	"name": "prophunt",
-	"version": "1.0",
-	"sharedassets": "*.*",
-
-	"depends": [
-		"base",
-		"rust"
-	],
-
-	"gamemodes": [
-		{
-			"name": "prophunt",
-			"title": "Prophunt",
-			"description": "Disguise as a prop and try to hide in plain sight from the seekers to win the round."
-		}
-	]
+	"ident": "rtmstuff.prophunt",
+    "sharedassets": "*.*"
 }
