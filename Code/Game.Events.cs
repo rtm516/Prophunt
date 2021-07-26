@@ -48,9 +48,9 @@ namespace Prophunt
 
 					mapProp.ClassName = prop.ClassInfo.Name;
 					mapProp.Model = prop.GetModel();
-					mapProp.Position = prop.WorldPos;
-					mapProp.Rotation = prop.WorldRot;
-					mapProp.Scale = prop.WorldScale;
+					mapProp.Position = prop.Position;
+					mapProp.Rotation = prop.Rotation;
+					mapProp.Scale = prop.Scale;
 					mapProp.Color = prop.RenderColor;
 
 					MapProps.Add( mapProp );

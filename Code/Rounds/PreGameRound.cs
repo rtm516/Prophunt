@@ -39,9 +39,9 @@ namespace Prophunt.Rounds
 			{
 				Prop prop = Library.Create<Entity>( mapProp.ClassName ) as Prop;
 				prop.SetModel( mapProp.Model );
-				prop.WorldPos = mapProp.Position;
-				prop.WorldRot = mapProp.Rotation;
-				prop.WorldScale = mapProp.Scale;
+				prop.Position = mapProp.Position;
+				prop.Rotation = mapProp.Rotation;
+				prop.Scale = mapProp.Scale;
 				prop.RenderColor = mapProp.Color;
 
 				// Freeze the prop until we are done placing

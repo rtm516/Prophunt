@@ -41,7 +41,7 @@ partial class Shotgun : ProphuntWeapon
 			return;
 		}
 
-		(Owner as AnimEntity).SetAnimParam( "b_attack", true );
+		(Owner as AnimEntity).SetAnimBool( "b_attack", true );
 
 		//
 		// Tell the clients to play the shoot effects
@@ -77,7 +77,7 @@ partial class Shotgun : ProphuntWeapon
 			return;
 		}
 
-		(Owner as AnimEntity).SetAnimParam( "b_attack", true );
+		(Owner as AnimEntity).SetAnimBool( "b_attack", true );
 
 		//
 		// Tell the clients to play the shoot effects
@@ -102,14 +102,14 @@ partial class Shotgun : ProphuntWeapon
 		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
 		Particles.Create( "particles/pistol_ejectbrass.vpcf", EffectEntity, "ejection_point" );
 
-		ViewModelEntity?.SetAnimParam( "fire", true );
+		ViewModelEntity?.SetAnimBool( "fire", true );
 
 		if ( IsLocalPawn )
 		{
 			new Sandbox.ScreenShake.Perlin( 1.0f, 1.5f, 2.0f );
 		}
 
-		CrosshairPanel?.OnEvent( "fire" );
+		//CrosshairPanel?.OnEvent( "fire" );
 	}
 
 	[ClientRpc]
@@ -119,8 +119,8 @@ partial class Shotgun : ProphuntWeapon
 
 		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
 
-		ViewModelEntity?.SetAnimParam( "fire_double", true );
-		CrosshairPanel?.OnEvent( "fire" );
+		ViewModelEntity?.SetAnimBool( "fire_double", true );
+		//CrosshairPanel?.OnEvent( "fire" );
 
 		if ( IsLocalPawn )
 		{
@@ -160,7 +160,7 @@ partial class Shotgun : ProphuntWeapon
 	[ClientRpc]
 	protected virtual void FinishReload()
 	{
-		ViewModelEntity?.SetAnimParam( "reload_finished", true );
+		ViewModelEntity?.SetAnimBool( "reload_finished", true );
 	}
 
 	public override void SimulateAnimator( PawnAnimator anim )

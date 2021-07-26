@@ -41,7 +41,7 @@ partial class SMG : ProphuntWeapon
 			return;
 		}
 
-		(Owner as AnimEntity).SetAnimParam( "b_attack", true );
+		(Owner as AnimEntity).SetAnimBool( "b_attack", true );
 
 		//
 		// Tell the clients to play the shoot effects
@@ -64,8 +64,8 @@ partial class SMG : ProphuntWeapon
 
 		new Grenade
 		{
-			WorldPos = Owner.EyePos + Owner.EyeRot.Forward * 50,
-			WorldRot = Owner.EyeRot,
+			Position = Owner.EyePos + Owner.EyeRot.Forward * 50,
+			Rotation = Owner.EyeRot,
 			Velocity = Owner.EyeRot.Forward * 1000,
 			Owner = Owner
 		};
@@ -84,8 +84,8 @@ partial class SMG : ProphuntWeapon
 			new Sandbox.ScreenShake.Perlin(0.5f, 4.0f, 1.0f, 0.5f);
 		}
 
-		ViewModelEntity?.SetAnimParam( "fire", true );
-		CrosshairPanel?.OnEvent( "fire" );
+		ViewModelEntity?.SetAnimBool( "fire", true );
+		//CrosshairPanel?.OnEvent( "fire" );
 	}
 
 	public override void SimulateAnimator( PawnAnimator anim )
